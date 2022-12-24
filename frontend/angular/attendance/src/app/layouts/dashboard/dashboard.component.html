@@ -1,3 +1,14 @@
-<p>dashboard works!</p>
-<button mat-button>Basic</button>
-<i class="fa-brands fa-youtube"></i>
+
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <app-header (toggleSideBarForMe)="sideBarTogger()"></app-header>
+    <app-toolbar></app-toolbar>
+    <h1>Welcome To our App</h1>
+    <app-footer></app-footer>
+  </mat-drawer-content>
+</mat-drawer-container>
+
