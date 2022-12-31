@@ -1,0 +1,42 @@
+<div class="container" *ngFor="let cardSetting of cardSetting">
+  <app-card
+    [contentTemplate]="contentTemplate"
+    [cardSetting]="cardSetting"
+  ></app-card>
+
+  <ng-template #contentTemplate>
+    <form class="example-form">
+      <div class="container my-4">
+        <div class="row">
+          <div class="col-12 col-sm-4 col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Venue</mat-label>
+              <input type="tel" matInput placeholder="Enter Vevue Name" />
+              <fa-icon [icon]="faLocationDot" matSuffix class="px-4"></fa-icon>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-4 col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Start at</mat-label>
+
+              <input type="tel" matInput placeholder="Enter Start Time" />
+              <fa-icon
+                [icon]="faHourglassStart"
+                matSuffix
+                class="px-4"
+              ></fa-icon>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-4 col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>End at</mat-label>
+
+              <input type="tel" matInput placeholder="Enter End Time" />
+              <fa-icon [icon]="faHourglassEnd" matSuffix class="px-4"></fa-icon>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+</div>

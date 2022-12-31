@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4" *ngFor="let cardSetting of cardSetting">
+      <app-card
+        [contentTemplate]="contentTemplate"
+        [cardSetting]="cardSetting"
+      ></app-card>
+
+      <ng-template #contentTemplate>
+        <div
+          class="container-fluid position-relative rounded"
+          style="background-color: #ebebeb"
+        >
+          <div class="row py-3">
+            <img
+              src="../../../../assets/images/program.webp"
+              class="img-fluid"
+              alt=""
+            />
+
+            <div class="col-4 text-capitalize mt-5"><h3>module</h3></div>
+            <div class="col-8 text-end mt-5 pe-5"><h1>5</h1></div>
+          </div>
+
+          <div
+            class="row py-3"
+            style="background-color: rgb(53, 189, 156) !important"
+          >
+            <div class="col-12 text-end">
+              <button
+                mat-button
+                class="text-capitalize p-3"
+                style="color: #fff"
+              >
+                more details
+              </button>
+            </div>
+          </div>
+        </div></ng-template
+      >
+    </div>
+  </div>
+</div>

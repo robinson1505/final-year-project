@@ -1,22 +1,23 @@
-:host{
-    mat-icon{
-      vertical-align: middle;
-    margin: 20px;
-    }
-  }
-  mat-nav-list{
+:host {
+  mat-nav-list {
     padding: 0;
     margin: 0;
+   
+    fa-icon {
+      vertical-align: middle;
+      margin: 20px;
+    }
   }
 
-  .profile-card{
+  .profile-card {
     text-align: center;
     padding: 40px 40px 40px 40px;
-    background-color: rgb(53,189,156);
-    img{
+    background-color: rgb(53, 189, 156);
+    img {
       width: 100px;
       height: 100px;
       // object-fit: cover;
       // border-radius: 100%;
     }
   }
+}

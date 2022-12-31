@@ -9,7 +9,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatBadgeModule} from '@angular/material/badge';
-import { MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 const material = [
   MatButtonModule,
@@ -20,7 +21,8 @@ const material = [
   MatToolbarModule,
   MatMenuModule,
   MatBadgeModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatInputModule
 
 ]
 

@@ -1,0 +1,68 @@
+<div class="card my-3 shadow">
+  <div
+    [ngClass]="[
+      cardSetting.subTitle !== '' ? 'card-header-sub' : 'card-header',
+      cardSetting.style == 'primary' ? 'card-primary' : 'card-secondary'
+    ]"
+    *ngIf="cardSetting.header"
+  >
+    <div class="row py-2">
+      <div class="col-1 col-sm-1 col-md-1 pt-3">
+        <mat-icon>timer</mat-icon>
+      </div>
+      <div class="col-md-5 col-sm-5 col-5 text-center fw-bold">
+        <div class="pb-2">{{ cardSetting.day }}</div>
+        <div>
+          <small>{{ cardSetting.module }}</small>
+        </div>
+      </div>
+      <div class="col-md-5 col-sm-5 col-5 text-center fw-bold">
+        <div class="pb-2">{{ cardSetting.venue }}</div>
+        <div>
+          <small>{{ cardSetting.time }}</small>
+        </div>
+      </div>
+      <div
+        [ngClass]="!!cardSetting.subTitle ? 'header-icon' : ''"
+        class="col-md-1 col-sm-1 col-1 text-end handIcon pt-3"
+      >
+        <fa-icon
+          [icon]="faPenToSquare"
+          *ngIf="!isOpen"
+          (click)="openhide()"
+          class="handIcon"
+        ></fa-icon>
+        <fa-icon
+          [icon]="faXmark"
+          *ngIf="isOpen"
+          (click)="openhide()"
+          class="handIcon"
+        ></fa-icon>
+      </div>
+    </div>
+  </div>
+  <!--HEADER-->
+  <div
+    class="card-body"
+    *ngIf="(cardSetting.header && isOpen) || !cardSetting.header"
+  >
+    <ng-container [ngTemplateOutlet]="contentTemplate"></ng-container>
+  </div>
+
+  <div
+    class="card-footer"
+    *ngIf="cardSetting.footer && isOpen"
+    [ngClass]="
+      cardSetting.style == 'primary'
+        ? 'card-footer-primary'
+        : 'card-footer-secondary'
+    "
+  >
+    <div class="row py-2">
+      <div class="col-12 col-sm-12 col-md-12 text-end">
+        <button mat-flat-button class="mx-3 p-4 btn-danger">Cancel</button>
+        <button mat-flat-button class="p-4 btn-success">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
