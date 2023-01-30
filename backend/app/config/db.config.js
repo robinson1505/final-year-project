@@ -13,7 +13,7 @@ const db = mysql.createPool({
 });
 
 
-// ?CHECK FOR CONNECTION
+// ? CHECK FOR CONNECTION
 db.getConnection((error) => {
   if (error) {
     console.log(error);
