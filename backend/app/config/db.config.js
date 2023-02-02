@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config("../../.env");
 
 //? Create database connection
-const db = mysql.createPool({
+const db = mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
   password: process.env.PASSWORD,
@@ -14,7 +14,7 @@ const db = mysql.createPool({
 
 
 // ? CHECK FOR CONNECTION
-db.getConnection((error) => {
+db.connect((error) => {
   if (error) {
     console.log(error);
   } else {

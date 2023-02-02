@@ -194,6 +194,24 @@ VALUES (
         "2022 / 2023"
     );
 
+INSERT INTO
+    student (
+        student_registration_number,
+        student_first_name,
+        student_middle_name,
+        student_last_name,
+        student_nta_level,
+        academic_year
+    )
+VALUES (
+        "NIT/BIT/2020/1185",
+        "Beneth",
+        "Mshumbusi",
+        "Emmanuel",
+        "NTA LEVEL 8",
+        "2022 / 2023"
+    );
+
 SELECT
     student.student_registration_number,
     student.student_first_name,
@@ -320,4 +338,17 @@ UPDATE programs
 SET
     program_name = " Bachelor Degree in Information and Technology";
 
-module_day VARCHAR(15) NOT NULL, 
+module_day VARCHAR(15) NOT NULL,
+SELECT
+    student.student_id,
+    student.student_registration_number,
+    student.student_first_name,
+    student.student_middle_name,
+    student.student_last_name,
+    programs.program_name,
+    student.student_nta_level,
+    student.academic_year
+FROM student
+    INNER JOIN programs ON student.student_nta_level = programs.nta_level
+WHERE
+    student_id = "9c8d779c-a275-11ed-8055-1cb32ecc74df";
