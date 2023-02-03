@@ -19,11 +19,11 @@ exports.findStudent = (req, res) => {
     if (error) {
       if (error.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Student with id ${req.params.studentId}.`,
+          message: `Not found Student with id ${id}.`,
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving Student with id " + req.params.studentId,
+          message: "Error retrieving Student with id " + id,
         });
       }
     } else res.send(data);

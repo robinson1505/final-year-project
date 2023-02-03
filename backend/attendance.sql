@@ -352,3 +352,5 @@ FROM student
     INNER JOIN programs ON student.student_nta_level = programs.nta_level
 WHERE
     student_id = "9c8d779c-a275-11ed-8055-1cb32ecc74df";
+
+    SELECT modules.module_id,modules.module_code,modules.module_name,programs.program_code,modules.semester,programs.nta_level  FROM modules INNER JOIN programs ON modules.module_nta_level = programs.nta_level;
