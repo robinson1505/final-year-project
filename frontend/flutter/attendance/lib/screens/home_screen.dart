@@ -1,5 +1,5 @@
 import 'package:attendance/widget/bottom_navigation.dart';
-import 'package:attendance/widget/content_widget.dart';
+import 'package:attendance/widget/session_list.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -27,7 +27,10 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          body:Padding(padding: EdgeInsets.all(10), child: ContentWidget(),),
+          body: Padding(
+            padding: const EdgeInsets.all(10),
+            child: SessionList(),
+          ),
           bottomNavigationBar: bottomNavigationBar(),
         ));
   }

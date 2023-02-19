@@ -1,62 +1,63 @@
+import 'package:attendance/models/timetableModel.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class Sessions extends StatelessWidget {
-  Sessions({
-    super.key,
-    required this.icon,
-    required this.day,
-    required this.module,
-    required this.venue,
-    required this.time,
-  });
-  Icon icon;
-  Widget day;
-  Widget module;
-  Widget venue;
-  Widget time;
+class SessionCard extends StatelessWidget {
+  const SessionCard({super.key, required this.timetable});
+  final TimetableModel timetable;
 
   @override
   Widget build(BuildContext context) {
-    // Size size = MediaQuery.of(context).size;
-    return Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Container(
-          padding: const EdgeInsets.all(15.0),
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(
-              53,
-              190,
-              156,
-              0.7,
-            ),
-            borderRadius: BorderRadius.circular(8),
+    return Card(
+      elevation: 2,
+      child: Padding(
+          padding: const EdgeInsets.all(
+            8.0,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              icon,
-              Column(
-                children: [
-                  day,
-                  const SizedBox(height: 15),
-                  module,
-                ],
+          child: SizedBox(
+            child: Column(children: [
+              Expanded(
+                child: Row(
+                  
+                  children: [
+                    Expanded(
+                      child: Text(
+                        DateFormat('EEEE')
+                            .format(timetable.moduleDay as DateTime),
+                      ),
+                    ),
+                     Expanded(
+                child: Text(
+                  "${timetable.timetableModule}",
+                ),
               ),
-              Column(children: [venue, const SizedBox(height: 15), time])
-            ],
-          ),
-        ));
+                  
+                  ],
+                ),
+              ),
+             
+              const Expanded(
+                child: Text(
+                  "Mobile Development",
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "${timetable.timetableVenue}",
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "${timetable.timetableLecturer}",
+                ),
+              ),
+                Expanded(
+                      child: Text(
+                        "${timetable.timeIn} - ${timetable.timeOut}",
+                      ),
+                    )
+            ]),
+          )),
+    );
   }
 }
-// ListTile(
-            
-//           minLeadingWidth:double.infinity,
-//             contentPadding: const EdgeInsets.all(2.0),
-//             leading: icon,
-//             title: day,
-//             subtitle: module,
-//             trailing: time,
-//             iconColor: Colors.white,
-//             textColor: Colors.white,
-//             tileColor: const Color.fromRGBO(53, 190, 156, 0.5),
-//           ),
