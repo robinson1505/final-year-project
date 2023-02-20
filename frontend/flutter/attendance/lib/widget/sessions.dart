@@ -18,17 +18,22 @@ class SessionCard extends StatelessWidget {
             child: Column(children: [
               Expanded(
                 child: Row(
-                  
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
+                      flex:1,
                       child: Text(
                         DateFormat('EEEE')
-                            .format(timetable.moduleDay as DateTime),
+                            .format(timetable.moduleDay as DateTime).toUpperCase(),
                       ),
                     ),
                      Expanded(
+                      flex: 2,
                 child: Text(
+                
                   "${timetable.timetableModule}",
+                  textAlign:TextAlign.end,
                 ),
               ),
                   

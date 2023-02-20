@@ -1,6 +1,7 @@
 import "package:attendance/controllers/timetableController.dart";
 import "package:attendance/widget/sessions.dart";
 import "package:flutter/material.dart";
+import "package:flutter_spinkit/flutter_spinkit.dart";
 import "package:get/get.dart";
 
 class SessionList extends StatelessWidget {
@@ -13,10 +14,19 @@ class SessionList extends StatelessWidget {
     return Obx(() {
       if (timetableController.isLoading.value) {
         return const Center(
-          child: CircularProgressIndicator(),
+          child: SpinKitFadingCircle(
+          
+            color: Color.fromRGBO(
+              53,
+              190,
+              156,
+              1,
+            ),
+          ),
         );
       } else {
         return GridView.builder(
+          shrinkWrap: true,
           itemCount: timetableController.timetableList.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2),

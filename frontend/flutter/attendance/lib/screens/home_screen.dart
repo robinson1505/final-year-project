@@ -1,4 +1,5 @@
 import 'package:attendance/widget/bottom_navigation.dart';
+import 'package:attendance/widget/percent_card.dart';
 import 'package:attendance/widget/session_list.dart';
 import 'package:flutter/material.dart';
 
@@ -27,9 +28,12 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(10),
-            child: SessionList(),
+          body: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            children: [
+              const PercentCard(),
+              SessionList(),
+            ],
           ),
           bottomNavigationBar: bottomNavigationBar(),
         ));
