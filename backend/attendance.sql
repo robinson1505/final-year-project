@@ -122,6 +122,7 @@ CREATE TABLE
         program_id CHAR(36) DEFAULT uuid() NOT NULL,
         program_code VARCHAR(20) NOT NULL,
         program_name VARCHAR(100) NOT NULL,
+        -- cannot be unique
         nta_level VARCHAR(30) UNIQUE NOT NULL,
         program_department VARCHAR(20) NOT NULL,
         PRIMARY KEY(program_id, nta_level),
