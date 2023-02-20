@@ -60,7 +60,7 @@ CREATE TABLE
         department_id CHAR(36) DEFAULT uuid() UNIQUE NOT NULL,
         department_name VARCHAR(100) NOT NULL,
         department_code VARCHAR(20) UNIQUE NOT NULL,
-        PRIMARY KEY(department_id),
+        PRIMARY KEY(department_id)
     );
 
 INSERT INTO
@@ -152,7 +152,7 @@ INSERT INTO
 VALUES (
         "BIT",
         "Bachelor Degree in Information and Technology",
-        "NTA LEVEL 8",
+        "NTA LEVEL 7",
         "CCT"
     );
 
