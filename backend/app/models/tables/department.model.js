@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     }
-  },{timestamps: false});
+  },
+ 
+  {timestamps: false,freezeTableName: true});
   return Department;
 };
 

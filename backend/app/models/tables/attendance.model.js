@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       }
     },
-    { timestamps: false }
+    { timestamps: false, freezeTableName: true }
   );
 
   return Attendance;
@@ -36,6 +36,9 @@ module.exports = (sequelize, DataTypes) => {
 //   // this.attendance_student = attendance.attendance_student;
 //   // this.attendance_module = attendance.attendance_module;
 //   // this.attendance_timetable = attendance.attendance_timetable;
+// One student has many attendance
+//One attendance has many modules
+//
 
 // };
 // Attendance.getAllAttendance = result => {

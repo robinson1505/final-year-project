@@ -1,4 +1,4 @@
-CREATE DATABASE attendance_app;
+    CREATE DATABASE attendance_app;
 
 USE attendance_app;
 
@@ -270,6 +270,7 @@ CREATE TABLE
         time_out TIME NOT NULL,
         time_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         PRIMARY KEY(timetable_id, timetable_code),
+       
         FOREIGN KEY (timetable_module) REFERENCES modules(module_code) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY (timetable_venue) REFERENCES venue(venue_code) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY (timetable_lecturer) REFERENCES lecturer(lecturer_staff_number) ON UPDATE CASCADE ON DELETE CASCADE

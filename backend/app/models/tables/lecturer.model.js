@@ -21,10 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     lecturer_staff_number: {
       type: DataTypes.STRING,
       unique:true,
+      allowNull:false
     },
     role: {
       type: DataTypes.ENUM("LECTURER"),
-      default: "LECTURER",
+      defaultValue: "LECTURER",
       allowNull: false
     },
     password: {
@@ -32,7 +33,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: { len: 4 }
     }
-  },{timestamps: false});
+  },
+
+  {timestamps: false,freezeTableName: true});
   return Lecturer
 };
 

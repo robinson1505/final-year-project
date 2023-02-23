@@ -1,28 +1,36 @@
 module.exports = (sequelize, DataTypes) => {
-  const Modules = sequelize.define("modules", {
-    id: {
-      allowNull:false,
-      type: DataTypes.UUID,
-      default: DataTypes.UUIDv4,
-      primaryKey: true
+  const Modules = sequelize.define(
+    "modules",
+    {
+      id: {
+        allowNull: false,
+        type: DataTypes.UUID,
+        default: DataTypes.UUIDv4,
+        primaryKey: true
+      },
+      module_name: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      module_code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+      },
+      semester: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      number_of_students: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      }
     },
-    module_name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    module_code: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    semester: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    }
-  },{timestamps: false});
+  
+    { timestamps: false,freezeTableName: true }
+  );
   return Modules;
 };
-
 
 // const { DataTypes } = require("sequelize");
 // const db = require("../config/db.config");

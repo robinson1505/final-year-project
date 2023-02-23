@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     "timetable",
     {
       id: {
-        allowNull:false,
+        allowNull: false,
         type: DataTypes.UUID,
         default: DataTypes.UUIDV4,
         primaryKey: true
@@ -34,7 +34,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
-      timestamps: false
+      timestamps: false,
+      freezeTableName: true
     }
   );
   return Timetable;

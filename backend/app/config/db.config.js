@@ -13,6 +13,7 @@ const db = new Sequelize(
   }
 );
 
+db.sync({force:true})
 // ? CHECK FOR CONNECTION
 db
   .authenticate()
