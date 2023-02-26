@@ -1,4 +1,4 @@
-const { Beacon } = require("../models");
+const { Beacon,Venue } = require("../models");
 
 module.exports = {
   async createBeacon(req, res) {
@@ -8,6 +8,15 @@ module.exports = {
       res.status(201).json({ beacon });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
+    }
+  },
+  async getBeacon(req, res) {
+    try {
+      const beacon = await Beacon.findAll({ include: [{ model: Venue,attributes:["id","venue_name","venue_code"]}] });
+      res.status(200).json({ beacon });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: error });
     }
   }
 };

@@ -1,22 +1,35 @@
 const express = require("express");
 const router = express.Router();
-// const attendance = require("../controller/attendance.controller")
-// const beacon = require("../controller/beacon.controller");
-// const department = require("../controller/department.controller");
-// const lecturer = require("../controller/lecturer.controller.js");
-// const modules =require("../controller/modules.controller")
-// const program =require("../controller/programs.controller")
-// const student = require("../controller/student.controller");
-// const timetable= require("../controller/timetable.controller")
+const attendance = require("../controller/attendance.controller");
+const beacon = require("../controller/beacon.controller");
+const department = require("../controller/department.controller");
+const lecturer = require("../controller/lecturer.controller.js");
+const modules = require("../controller/modules.controller");
+const program = require("../controller/programs.controller");
+const student = require("../controller/student.controller");
+const timetable = require("../controller/timetable.controller");
 const venue = require("../controller/venue.controller");
+//* CREATE QUERIES
+router.post("/attendance", attendance.createAttendance);
+router.post("/beacon", beacon.createBeacon);
+router.post("/department", department.createDepartment);
+router.post("/lecturer", lecturer.createLecturer);
+router.post("/module", modules.createModules);
+router.post("/program", program.createProgram);
+router.post("/student", student.createStudent);
+router.post("/timetable", timetable.createTimetable);
+router.post("/venue", venue.createVenue);
 
-router.post("/venue",venue.createVenue);
-
-
-
-
-
-
+// * GETTING ALL
+router.get("/attendance", attendance.getAttendance);
+router.get("/beacon", beacon.getBeacon);
+router.get("/department", department.getDepartment);
+router.get("/lecturer", lecturer.getLecturer);
+router.get("/modules", modules.getModules);
+router.get("/programs", program.getPrograms);
+router.get("/student", student.getStudent);
+router.get("/timetable", timetable.getTimetable);
+router.get("/venue", venue.getVenue);
 
 // //========================================  ATTENDANCE ROUTER     ==================================//
 // router.get("/attendance", attendance.findAllAttendance);
@@ -53,4 +66,4 @@ router.post("/venue",venue.createVenue);
 // router.get("/venue", venue.findAllVenues);
 // router.get("/venue/:venueId", venue.findVenue);
 
- module.exports = router;
+module.exports = router;

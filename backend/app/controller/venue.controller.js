@@ -1,4 +1,4 @@
-const { Venue } = require("../models");
+const { Venue, } = require("../models");
 
 module.exports = {
   async createVenue(req, res) {
@@ -15,6 +15,15 @@ module.exports = {
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Internal server error" });
+    }
+  },
+  async getVenue(req, res) {
+    try {
+      const venue = await Venue.findAll();
+      res.status(200).json({ venue });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: error });
     }
   }
 };

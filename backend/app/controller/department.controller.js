@@ -1,19 +1,28 @@
-const {Department} = require("../models");
+const { Department } = require("../models");
 
 module.exports = {
   async createDepartment(req, res) {
     try {
       const { department_name, department_code } = req.body;
-      const department = await Department.create({ department_name, department_code });
+      const department = await Department.create({
+        department_name,
+        department_code
+      });
       res.status(201).json({ department });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
     }
+  },
+  async getDepartment(req, res) {
+    try {
+      const department = await Department.findAll();
+      res.status(200).json({ department });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: error });
+    }
   }
 };
-
-
-
 
 // exports.findAllDepartment = (req, res) => {
 //   Department.getAllDepartments((error, data) => {

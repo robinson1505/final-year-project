@@ -1,4 +1,4 @@
-const { Programs } = require("../models");
+const { Programs, Department } = require("../models");
 
 module.exports = {
   async createProgram(req, res) {
@@ -18,6 +18,17 @@ module.exports = {
       res.status(201).json({ program });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
+    }
+  },
+  async getPrograms(req, res) {
+    try {
+      const programs = await Programs.findAll({
+        include: [{ model: Department }]
+      });
+      res.status(200).json({ programs });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: error });
     }
   }
 };

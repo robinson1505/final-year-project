@@ -5,13 +5,13 @@ module.exports = (sequelize, DataTypes) => {
       id: {
         allowedNull: false,
         type: DataTypes.UUID,
-        default: DataTypes.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true
       },
+
       program_code: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
       },
       program_name: {
         type: DataTypes.STRING,
@@ -22,8 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         allowedNull: false
       }
     },
-
-    { timestamps: false,freezeTableName: true }
+    { timestamps: false, freezeTableName: true }
   );
   return Program;
 };

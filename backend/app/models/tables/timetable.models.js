@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       id: {
         allowNull: false,
         type: DataTypes.UUID,
-        default: DataTypes.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true
       },
       timetable_code: {
@@ -25,13 +25,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TIME,
         allowNull: false
       },
-      updatedAt: {
-        type: "TIMESTAMP",
-        defaultValue: DataTypes.literal(
-          "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
-        ),
-        allowNull: false
-      }
+      // updatedAt: {
+      //   type: DataTypes.DATE,
+      //   defaultValue: DataTypes.literal(
+      //     "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+      //   ),
+       
+      // }
     },
     {
       timestamps: false,

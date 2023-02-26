@@ -3,9 +3,9 @@ module.exports = (sequelize, DataTypes) => {
     "venue",
     {
       id: {
-        allowNull: false,
+      
         type: DataTypes.UUID,
-        default: DataTypes.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true
       },
       venue_name: {

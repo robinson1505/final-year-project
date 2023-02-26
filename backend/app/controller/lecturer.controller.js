@@ -1,4 +1,4 @@
-const { Lecturer } = require("../models");
+const { Lecturer, Department } = require("../models");
 
 module.exports = {
   async createLecturer(req, res) {
@@ -21,7 +21,18 @@ module.exports = {
       });
       res.status(201).json({ lecturer });
     } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
+      res.status(500).json(error);
+    }
+  },
+  async getLecturer(req, res) {
+    try {
+      const lecturer = await Lecturer.findAll({
+        include: [{ model: Department }]
+      });
+      res.status(200).json({ lecturer });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: error });
     }
   }
 };

@@ -1,4 +1,4 @@
-const { Timetable } = require("../models");
+const { Timetable, Modules, Venue, Lecturer, Student } = require("../models");
 
 module.exports = {
   async createTimetable(req, res) {
@@ -23,7 +23,18 @@ module.exports = {
       });
       res.status(201).json({ timetable });
     } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: error });
+    }
+  },
+  async getTimetable(req, res) {
+    try {
+      const timetable = await Timetable.findAll({
+        include: [{ model: Lecturer }, { model: Venue }, { model: Modules }]
+      });
+      res.status(200).json({ timetable });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: error });
     }
   }
 };

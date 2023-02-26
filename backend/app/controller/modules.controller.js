@@ -1,4 +1,4 @@
-const { Modules } = require("../models");
+const { Modules,Programs} = require("../models");
 
 module.exports = {
   async createModules(req, res) {
@@ -7,19 +7,27 @@ module.exports = {
         module_name,
         module_code,
         semester,
-        number_of_student,
+        number_of_students,
         module_program
       } = req.body;
       const module = await Modules.create({
         module_name,
         module_code,
         semester,
-        number_of_student,
+        number_of_students,
         module_program
       });
       res.status(201).json({ module });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
+    }
+  },  async getModules(req, res) {
+    try {
+      const modules = await Modules.findAll({ include: [{ model: Programs}] });
+      res.status(200).json({ modules });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: error });
     }
   }
 };

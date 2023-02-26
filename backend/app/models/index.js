@@ -20,8 +20,8 @@ const Student = StudentModel(sequelize, Sequelize);
 const Timetable = TimetableModel(sequelize, Sequelize);
 const Venue = VenueModel(sequelize, Sequelize);
 
-Venue.hasOne(Beacon, { foreignKey: "beacon_venue" });
-Beacon.belongsTo(Venue, { foreignKey: "beacon_venue" });
+Venue.hasOne(Beacon, { foreignKey: "beacon_venue", });
+Beacon.belongsTo(Venue, { foreignKey: "beacon_venue", });
 
 Department.hasMany(Lecturer, { foreignKey: "lecturer_department" });
 Lecturer.belongsTo(Department, { foreignKey: "lecturer_department" });

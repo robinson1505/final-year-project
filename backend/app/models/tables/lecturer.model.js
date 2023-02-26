@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Lecturer = sequelize.define("lecturer", {
     id: {
-      allowNull:false,
+  
       type: DataTypes.UUID,
-      default: DataTypes.UUIDv4,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
     lecturer_first_name: {
