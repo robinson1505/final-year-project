@@ -13,18 +13,17 @@ class _FormWidgetState extends State<FormWidget> {
   final regNoController = TextEditingController();
   final passwordController = TextEditingController();
   final hidePassword = true;
-  
+
   @override
   Widget build(BuildContext context) {
-
     return Center(
       child: Container(
-      
         padding: const EdgeInsets.all(18),
         width: double.infinity,
         decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20,
+            borderRadius: BorderRadius.circular(
+              20,
             ),
             boxShadow: const [
               BoxShadow(
@@ -100,7 +99,8 @@ class _FormWidgetState extends State<FormWidget> {
                     ),
                     labelText: "Password",
                     suffixIcon: IconButton(
-                        onPressed: () {}, icon: Icon(Icons.visibility_off))),
+                        onPressed: () {},
+                        icon: const Icon(Icons.visibility_off))),
               ),
               const SizedBox(
                 height: 20,
@@ -108,7 +108,7 @@ class _FormWidgetState extends State<FormWidget> {
               ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      Color.fromRGBO(
+                      const Color.fromRGBO(
                         53,
                         190,
                         156,
@@ -120,7 +120,9 @@ class _FormWidgetState extends State<FormWidget> {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => HomeScreen()));
                   },
-                  child: Text("Login", style:TextStyle(fontSize: 30,fontWeight: FontWeight.bold)))
+                  child: const Text("Login",
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)))
             ],
           ),
         ),
