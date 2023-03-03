@@ -17,7 +17,7 @@ module.exports = {
       });
       res.status(201).json({ program });
     } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: error });
     }
   },
   async getPrograms(req, res) {

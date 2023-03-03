@@ -34,14 +34,14 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: "STUDENT",
         allowNull: false
       },
+
       password: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: { len: 4 }
       }
     },
-  
-    { timestamps: false,freezeTableName: true }
+    { timestamps: false, freezeTableName: true }
   );
   return Student;
 };

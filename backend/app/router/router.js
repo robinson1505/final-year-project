@@ -17,6 +17,7 @@ router.post("/lecturer", lecturer.createLecturer);
 router.post("/module", modules.createModules);
 router.post("/program", program.createProgram);
 router.post("/student", student.createStudent);
+router.post("/student/login", student.studentLogin);
 router.post("/timetable", timetable.createTimetable);
 router.post("/venue", venue.createVenue);
 

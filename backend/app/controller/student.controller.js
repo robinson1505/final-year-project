@@ -1,4 +1,8 @@
-const { Student, Programs } = require("../models");
+const { Student } = require("../models");
+var jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const salt = bcrypt.genSaltSync(10);
+const secret = "smart-attendance-for-national-institute-of-transport";
 
 module.exports = {
   async createStudent(req, res) {
@@ -10,6 +14,7 @@ module.exports = {
         student_registration_number,
         academic_year,
         student_program,
+
         password
       } = req.body;
       const student = await Student.create({
@@ -19,7 +24,7 @@ module.exports = {
         student_registration_number,
         academic_year,
         student_program,
-        password
+        password: bcrypt.hashSync(password, salt)
       });
       res.status(201).json({ student });
     } catch (error) {
@@ -29,7 +34,12 @@ module.exports = {
   async getStudent(req, res) {
     try {
       const student = await Student.findAll({
-        include: [{ model: Programs,attributes:["id","program_name","program_code", "nta_level"] }],
+        include: [
+          {
+            model: Programs,
+            attributes: ["id", "program_name", "program_code", "nta_level"]
+          }
+        ],
         attributes: [
           "id",
           "student_first_name",
@@ -45,6 +55,36 @@ module.exports = {
       console.error(error);
       res.status(500).json({ error: error });
     }
+  },
+
+  async studentLogin(req, res) {
+    try{
+      const { student_registration_number, password } = req.body;
+    const student = await Student.findOne({
+      where: { student_registration_number: student_registration_number }
+    });
+
+    if (student) {
+      const comparePassword = bcrypt.compareSync(password, student.password);
+      if (comparePassword) {
+        let token = jwt.sign({ id: student.id }, secret, {
+          expiresIn: 1 * 24 * 60 * 60 * 1000
+        });
+        res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
+        console.log("user", JSON.stringify(user, null, 2));
+        console.log(token);
+        return res.status(201).send(user);
+      }else{
+        return res.status(401).send("Authentication failed");
+      }
+    }else{
+      return res.status(401).send("Authentication failed");
+    }
+
+    }catch(error){
+      console.log(error);
+    }
+    
   }
 };
 
