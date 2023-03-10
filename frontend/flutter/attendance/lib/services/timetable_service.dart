@@ -1,4 +1,4 @@
-import 'package:attendance/models/timetableModel.dart';
+import 'package:attendance/models/timetable_model.dart';
 import 'package:http/http.dart' as http;
 
 class TimetableService {
