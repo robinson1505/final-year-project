@@ -6,15 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    lecturer_first_name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lecturer_middle_name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lecturer_last_name: {
+    lecturer_full_name: {
       type: DataTypes.STRING,
       allowNull: false
     },

@@ -3,6 +3,7 @@ const sequelize = require("../config/db.config");
 const AttendanceModel = require("./tables/attendance.model");
 const BeaconModel = require("./tables/beacon.model");
 const DepartmentModel = require("./tables/department.model");
+const EnrollmentModel = require("./tables/enrollment.model");
 const LecturerModel = require("./tables/lecturer.model");
 const ModulesModel = require("./tables/modules.model");
 const ProgramsModel = require("./tables/programs.model");
@@ -13,6 +14,7 @@ const VenueModel = require("./tables/venue.model");
 const Attendance = AttendanceModel(sequelize, Sequelize);
 const Beacon = BeaconModel(sequelize, Sequelize);
 const Department = DepartmentModel(sequelize, Sequelize);
+const Enrollment = EnrollmentModel(sequelize, Sequelize);
 const Lecturer = LecturerModel(sequelize, Sequelize);
 const Modules = ModulesModel(sequelize, Sequelize);
 const Programs = ProgramsModel(sequelize, Sequelize);
@@ -29,20 +31,26 @@ Lecturer.belongsTo(Department, { foreignKey: "lecturer_department" });
 Department.hasMany(Programs, { foreignKey: "program_department" });
 Programs.belongsTo(Department, { foreignKey: "program_department" });
 
+Student.hasMany(Enrollment, { foreignKey: "student_enrollment" });
+Enrollment.belongsTo(Student, { foreignKey: "student_enrollment" });
+
+Modules.hasMany(Enrollment, { foreignKey: "module_enrolled" });
+Enrollment.belongsTo(Modules, { foreignKey: "module_enrolled" });
+
 Programs.hasMany(Student, { foreignKey: "student_program" });
 Student.belongsTo(Programs, { foreignKey: "student_program" });
 
 Programs.hasMany(Modules, { foreignKey: "module_program" });
 Modules.belongsTo(Programs, { foreignKey: "module_program" });
 
+Lecturer.hasMany(Modules, { foreignKey: "lecturer_module" });
+Modules.belongsTo(Lecturer, { foreignKey: "lecturer_module" });
+
 Modules.hasMany(Timetable, { foreignKey: "timetable_module" });
 Timetable.belongsTo(Modules, { foreignKey: "timetable_module" });
 
 Venue.hasMany(Timetable, { foreignKey: "timetable_venue" });
 Timetable.belongsTo(Venue, { foreignKey: "timetable_venue" });
-
-Lecturer.hasMany(Timetable, { foreignKey: "timetable_lecturer" });
-Timetable.belongsTo(Lecturer, { foreignKey: "timetable_lecturer" });
 
 Student.hasMany(Attendance, { foreignKey: "student_attendance" });
 Attendance.belongsTo(Student, { foreignKey: "student_attendance" });
@@ -57,12 +65,11 @@ module.exports = {
   Attendance,
   Beacon,
   Department,
+  Enrollment,
   Lecturer,
   Modules,
   Programs,
   Student,
   Timetable,
   Venue
-
-  // sequelize
 };

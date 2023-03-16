@@ -1,4 +1,4 @@
-const { Student } = require("../models");
+const { Student,Programs } = require("../models");
 var jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
