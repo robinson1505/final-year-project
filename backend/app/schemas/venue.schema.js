@@ -12,9 +12,24 @@ extend type Query{
 }
 
 extend type Mutation{
-    addVenue(venue_name: String!
+    addVenue(
+        venue_name: String!
         venue_code: String!
-        venue_capacity:Int!): Venue!
+        venue_capacity:Int!
+        ): Venue!
+
+    updateVenue(
+            id:ID!
+            venue_name: String!
+            venue_code: String!
+            venue_capacity:Int
+            ): Venue!
+        
+    deleteVenue(
+            id:ID!
+            ): Boolean!
+        
 }
+
 `;
 export default venueDefs;

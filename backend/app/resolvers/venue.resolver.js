@@ -23,8 +23,40 @@ const venueResolver = {
   },
   Mutation: {
     addVenue: async (parent, { venue_name, venue_code, venue_capacity }) => {
-      const venue = await Venue.create({ venue_name,venue_code,venue_capacity });
-      return venue.toJSON();
+      try {
+        const venue = await Venue.create({
+          venue_name,
+          venue_code,
+          venue_capacity
+        });
+        return venue.toJSON();
+      } catch (error) {
+        console.error("Error there some field are null: ", error);
+        throw new Error("Error on Adding venue");
+      }
+    },
+    updateVenue: async (
+      parent,
+      { id, venue_name, venue_code, venue_capacity }
+    ) => {
+      try {
+        const venue = await Venue.findOne({ where: { id } });
+        venue.update({ venue_name, venue_code, venue_capacity });
+        return venue;
+      } catch (error) {
+        console.error("Error there can not find the venue: ", error);
+        throw new Error(error);
+      }
+    },
+    deleteVenue: async (parent, { id }) => {
+      try {
+        const venue = await Venue.findOne({ where: { id } });
+        venue.destroy();
+        return true;
+      } catch (error) {
+        console.error("Error there can not find the venue: ", error);
+        throw new Error("Error on deleting venue");
+      }
     }
   }
 };
