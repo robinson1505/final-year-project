@@ -7,8 +7,8 @@ enum AttendanceStatus{
 }
 type Attendance{
 id:ID!
-attendanceCode:String!
-attendanceStatus:AttendanceStatus!
+attendance_code:String!
+attendance_status:AttendanceStatus!
 }
 extend type Query{
 getAllAttendance:[Attendance]

@@ -1,10 +1,10 @@
 const timetableDefs = `
 type Timetable{
     id:ID!
-    timetableCode:String!
-    moduleDay:String!
-    timeIn:String!
-    timeOut:String!
+    timetable_code:String!
+    module_day:String!
+    time_in:String!
+    time_out:String!
 }
 extend type Query{
     getAllTimetable:[Timetable]

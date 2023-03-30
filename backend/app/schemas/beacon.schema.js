@@ -1,7 +1,8 @@
 const beaconDefs = `
 type Beacon{
     id:ID!
-    beaconMacAddress:String!
+    beacon_mac_address:String!
+    
 }
 
 extend type Query{

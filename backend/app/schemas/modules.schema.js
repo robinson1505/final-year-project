@@ -1,9 +1,9 @@
 const modulesDefs = `
 type Modules{
     id:ID!
-    moduleName:String!
-    moduleCode:String!
-    numberOfStudents:Int!
+    module_name:String!
+    module_code:String!
+    number_of_students:Int!
 }
 extend type Query{
     getAllModules:[Modules]

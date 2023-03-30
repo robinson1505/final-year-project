@@ -1,8 +1,8 @@
 const studentDefs = `
 type Student{
     id:ID!
-    studentFullName:String!
-    studentRegistrationNumber:String!
+    student_fullName:String!
+    student_registration_number:String!
     password:String!
 }
 extend type Query{

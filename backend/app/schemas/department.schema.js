@@ -1,8 +1,8 @@
 const departmentDefs = `
 type Department{
     id:ID!
-    departmentName:String!
-    departmentCode:String!
+    department_name:String!
+    department_code:String!
 }
 extend type Query{
     getAllDepartments:[Department]

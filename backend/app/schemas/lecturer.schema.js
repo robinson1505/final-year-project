@@ -1,8 +1,8 @@
 const lecturerDefs = `
 type Lecturer{
 id:ID!
-lectureFullName:String!
-lecturerStaffNumber:String!
+lecture_full_name:String!
+lecturer_staff_number:String!
 password:String!
 }
 extend type Query{
