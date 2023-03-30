@@ -5,6 +5,9 @@ lectureFullName:String!
 lecturerStaffNumber:String!
 password:String!
 }
-
+extend type Query{
+    getAllLecturers:[Lecturer]
+    getLecturer(id:ID):Lecturer
+}
 `;
-module.exports = lecturerDefs;
+export default lecturerDefs;

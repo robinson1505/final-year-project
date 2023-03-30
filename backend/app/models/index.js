@@ -1,26 +1,26 @@
-const Sequelize = require("sequelize");
-const sequelize = require("../config/db.config");
-const AttendanceModel = require("./tables/attendance.model");
-const BeaconModel = require("./tables/beacon.model");
-const DepartmentModel = require("./tables/department.model");
-const EnrollmentModel = require("./tables/enrollment.model");
-const LecturerModel = require("./tables/lecturer.model");
-const ModulesModel = require("./tables/modules.model");
-const ProgramsModel = require("./tables/programs.model");
-const StudentModel = require("./tables/student.model");
-const TimetableModel = require("./tables/timetable.models");
-const VenueModel = require("./tables/venue.model");
+import DataTypes from "sequelize";
+import sequelize from "../config/db.config.js";
+import AttendanceModel from "./tables/attendance.model.js";
+import BeaconModel from "./tables/beacon.model.js";
+import DepartmentModel from "./tables/department.model.js";
+import EnrollmentModel from "./tables/enrollment.model.js";
+import LecturerModel from "./tables/lecturer.model.js";
+import ModulesModel from "./tables/modules.model.js";
+import ProgramsModel from "./tables/programs.model.js";
+import StudentModel from "./tables/student.model.js";
+import TimetableModel from "./tables/timetable.model.js";
+import VenueModel from "./tables/venue.model.js";
 
-const Attendance = AttendanceModel(sequelize, Sequelize);
-const Beacon = BeaconModel(sequelize, Sequelize);
-const Department = DepartmentModel(sequelize, Sequelize);
-const Enrollment = EnrollmentModel(sequelize, Sequelize);
-const Lecturer = LecturerModel(sequelize, Sequelize);
-const Modules = ModulesModel(sequelize, Sequelize);
-const Programs = ProgramsModel(sequelize, Sequelize);
-const Student = StudentModel(sequelize, Sequelize);
-const Timetable = TimetableModel(sequelize, Sequelize);
-const Venue = VenueModel(sequelize, Sequelize);
+const Attendance = AttendanceModel(sequelize, DataTypes);
+const Beacon = BeaconModel(sequelize, DataTypes);
+const Department = DepartmentModel(sequelize, DataTypes);
+const Enrollment = EnrollmentModel(sequelize, DataTypes);
+const Lecturer = LecturerModel(sequelize, DataTypes);
+const Modules = ModulesModel(sequelize, DataTypes);
+const Programs = ProgramsModel(sequelize, DataTypes);
+const Student = StudentModel(sequelize, DataTypes);
+const Timetable = TimetableModel(sequelize, DataTypes);
+const Venue = VenueModel(sequelize, DataTypes);
 
 Venue.hasOne(Beacon, { foreignKey: "beacon_venue" });
 Beacon.belongsTo(Venue, { foreignKey: "beacon_venue" });
@@ -61,7 +61,7 @@ Attendance.belongsTo(Modules, { foreignKey: "attendance_module" });
 Timetable.hasMany(Attendance, { foreignKey: "attendance_timetable" });
 Attendance.belongsTo(Timetable, { foreignKey: "attendance_timetable" });
 
-module.exports = {
+export  {
   Attendance,
   Beacon,
   Department,

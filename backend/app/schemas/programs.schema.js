@@ -5,6 +5,9 @@ type Program{
     programName:String!
     ntaLevel:String!
 }
-
+extend type Query{
+    getAllPrograms:[Program]
+    getProgram(id:ID):Program
+}
 `;
-module.exports = programDefs;
+export default programDefs;

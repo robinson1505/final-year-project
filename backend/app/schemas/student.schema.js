@@ -5,7 +5,10 @@ type Student{
     studentRegistrationNumber:String!
     password:String!
 }
-
+extend type Query{
+    getAllStudents:[Student]
+    getStudent(id:ID):Student
+}
 `;
 
-module.exports = studentDefs;
+export default studentDefs;

@@ -1,11 +1,14 @@
-module.exports = (sequelize, DataTypes) => {
-  const Venue = sequelize.define(
+import { v4 as uuidv4 } from 'uuid';
+export default (sequelize, DataTypes) => {
+  const VenueModel = sequelize.define(
     "venue",
     {
       id: {
-      
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        defaultValue:uuidv4,
+        unique:true,
+    
         primaryKey: true
       },
       venue_name: {
@@ -28,5 +31,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  return Venue;
+  return VenueModel;
 };

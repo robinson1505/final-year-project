@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes) => {
-  const Program = sequelize.define(
+export default (sequelize, DataTypes) => {
+  const ProgramModel = sequelize.define(
     "program",
     {
       id: {
@@ -24,6 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     { timestamps: false, freezeTableName: true }
   );
-  return Program;
+  return ProgramModel;
 };
 

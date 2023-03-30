@@ -6,7 +6,11 @@ type Timetable{
     timeIn:String!
     timeOut:String!
 }
+extend type Query{
+    getAllTimetable:[Timetable]
+    getTimetable(id:ID):Timetable
+}
 
 `;
 
-module.exports = timetableDefs;
+export default timetableDefs;

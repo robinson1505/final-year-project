@@ -1,32 +1,30 @@
-const { Venue, } = require("../models");
+import { Venue } from "../models";
 
-module.exports = {
-  async createVenue(req, res) {
-    try {
-      const { venue_name, venue_code, venue_capacity } = req.body;
-      const venue = await Venue.create({
-        venue_name,
-        venue_code,
-        venue_capacity
-      });
-      res
-        .status(201)
-        .json({ message: "Venue creates Success...", data: venue });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal server error" });
-    }
-  },
-  async getVenue(req, res) {
-    try {
-      const venue = await Venue.findAll();
-      res.status(200).json({ venue });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: error });
-    }
+export async function createVenue(req, res) {
+  try {
+    const { venue_name, venue_code, venue_capacity } = req.body;
+    const venue = await Venue.create({
+      venue_name,
+      venue_code,
+      venue_capacity
+    });
+    res
+      .status(201)
+      .json({ message: "Venue creates Success...", data: venue });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
   }
-};
+}
+export async function getVenue(req, res) {
+  try {
+    const venue = await Venue.findAll();
+    res.status(200).json({ venue });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error });
+  }
+}
 
 // // RETRIEVE ALL VENUES
 // exports.findAllVenues = (req, res) => {

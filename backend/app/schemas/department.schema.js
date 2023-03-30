@@ -4,5 +4,9 @@ type Department{
     departmentName:String!
     departmentCode:String!
 }
+extend type Query{
+    getAllDepartments:[Department]
+    getDepartment(id:ID):Department
+}
 `;
-module.exports = departmentDefs;
+export default departmentDefs;

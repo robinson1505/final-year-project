@@ -10,5 +10,9 @@ id:ID!
 attendanceCode:String!
 attendanceStatus:AttendanceStatus!
 }
+extend type Query{
+getAllAttendance:[Attendance]
+getAttendance(id:ID):Attendance
+}
 `;
-module.exports = attendanceDefs;
+export default attendanceDefs;

@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes) => {
-  const Beacon = sequelize.define("beacon", {
+export default (sequelize, DataTypes) => {
+  const BeaconModel = sequelize.define("beacon", {
     id: {
       allowNull:false,
       type: DataTypes.UUID,
@@ -12,5 +12,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   },
   {timestamps: false,freezeTableName: true});
-  return Beacon;
+  return BeaconModel;
 };

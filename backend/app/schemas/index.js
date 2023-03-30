@@ -1,36 +1,27 @@
-const attendanceDefs = require("./attendance.schema");
-const beaconDefs = require("./beacon.schema");
-const departmentDefs = require("./department.schema");
-const enrollmentDefs = require("./enrollment.schema");
-const lecturerDefs = require("./lecturer.schema");
-const modulesDefs = require("./modules.schema");
-const programsDefs = require("./attendance.schema");
-const studentDefs = require("./student.schema");
-const timetableDefs = require("./timetable.schema");
-const venueDefs = require("./venue.schema");
+import attendanceDefs from "./attendance.schema.js";
+import beaconDefs from "./beacon.schema.js";
+import departmentDefs from "./department.schema.js";
+import enrollmentDefs from "./enrollment.schema.js";
+import lecturerDefs from "./lecturer.schema.js";
+import modulesDefs from "./modules.schema.js";
+import programDefs from "./programs.schema.js";
+import root from "./root.js";
+import studentDefs from "./student.schema.js";
+import timetableDefs from "./timetable.schema.js";
+import venueDefs from "./venue.schema.js";
 
-const linkDefs = `
-type Query{
-    _:Boolean
-}
-type Mutation{
-    _:Boolean
-}
-type Subscription{
-    _:Boolean
-}
-`;
-
-module.exports = [
+const typeDefs = [
   attendanceDefs,
   beaconDefs,
   departmentDefs,
   enrollmentDefs,
   lecturerDefs,
-  linkDefs,
   modulesDefs,
-  programsDefs,
+  programDefs,
+  root,
   studentDefs,
   timetableDefs,
   venueDefs
 ];
+
+export default typeDefs;

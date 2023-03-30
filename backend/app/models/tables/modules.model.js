@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes) => {
-  const Modules = sequelize.define(
+export default (sequelize, DataTypes) => {
+  const ModulesModel = sequelize.define(
     "modules",
     {
       id: {
@@ -24,6 +24,5 @@ module.exports = (sequelize, DataTypes) => {
     },
     { timestamps: false, freezeTableName: true }
   );
-  return Modules;
+  return ModulesModel;
 };
-

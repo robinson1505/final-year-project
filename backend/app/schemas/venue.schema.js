@@ -1,9 +1,20 @@
 const venueDefs = `
 type Venue{
     id:ID!
-    venueName:String!
-    venueCode:String!
-    venueCapacity:String!
+    venue_name:String!
+    venue_code:String!
+    venue_capacity:Int!
+}
+
+extend type Query{
+    getAllVenues:[Venue]
+    getVenue(id:ID!): Venue!
+}
+
+extend type Mutation{
+    addVenue(venue_name: String!
+        venue_code: String!
+        venue_capacity:Int!): Venue!
 }
 `;
-module.exports = venueDefs;
+export default venueDefs;

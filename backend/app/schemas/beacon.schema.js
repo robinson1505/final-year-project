@@ -4,5 +4,9 @@ type Beacon{
     beaconMacAddress:String!
 }
 
+extend type Query{
+    getAllBeacons:[Beacon]
+    getBeacon(id:ID):Beacon
+}
 `;
-module.exports = beaconDefs;
+export default beaconDefs;

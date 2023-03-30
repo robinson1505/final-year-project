@@ -1,26 +1,27 @@
-const { Sequelize } = require("sequelize");
-const config = require("./config");
+import { Sequelize } from "sequelize";
+import config  from "./config.js";
 
-console.log(config.PASSWORD);
+
 //? Create database connection
-const db = new Sequelize(
+const sequelize = new Sequelize(
   config.DATABASE,
   config.USERNAME,
   config.PASSWORD,
+
+
   {
     host: config.HOST,
     dialect: config.DIALECT
   }
 );
 
- db.sync({alter:true})
+  // sequelize.sync({ force: true });
 // ? CHECK FOR CONNECTION
-db
+sequelize
   .authenticate()
   .then(() => {
     console.log("Connection has been established successfully.");
   })
   .catch(err => console.error("Unable to connect to the database:", err));
 
-
-module.exports = db;
+export default sequelize;

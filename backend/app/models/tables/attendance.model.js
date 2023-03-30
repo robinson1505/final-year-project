@@ -1,9 +1,8 @@
-module.exports = (sequelize, DataTypes) => {
-  const Attendance = sequelize.define(
+export default (sequelize, DataTypes) => {
+  const AttendanceModel = sequelize.define(
     "attendance",
     {
       id: {
-       
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
@@ -15,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       attendance_status: {
         type: DataTypes.ENUM("BAD", "SATISFY", "GOOD", "EXCELLENT"),
-        default: "SATISFY",
+        defaultValue: "SATISFY",
         allowNull: false
       }
     },
     { timestamps: false, freezeTableName: true }
   );
 
-  return Attendance;
+  return AttendanceModel;
 };

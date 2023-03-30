@@ -1,12 +1,13 @@
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 dotenv.config("../../.env");
 
-module.exports = {
+const config = {
   HOST: process.env.HOST,
   DATABASE: process.env.DATABASE,
   USERNAME: process.env.USERNAME,
   PASSWORD: process.env.PASSWORD,
- DIALECT: process.env.DIALECT,
+  PORT:process.env.DB_PORT,
+  DIALECT: process.env.DIALECT,
 
   pool: {
     max: 5,
@@ -16,3 +17,4 @@ module.exports = {
   }
 };
 
+export default config;

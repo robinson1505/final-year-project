@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes) => {
-  const Department = sequelize.define("department", {
+export default (sequelize, DataTypes) => {
+  const DepartmentModel = sequelize.define("department", {
     id: {
       allowNull:false,
       type: DataTypes.UUID,
@@ -18,6 +18,6 @@ module.exports = (sequelize, DataTypes) => {
   },
  
   {timestamps: false,freezeTableName: true});
-  return Department;
+  return DepartmentModel;
 };
 

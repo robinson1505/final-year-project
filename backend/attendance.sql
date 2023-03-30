@@ -8,12 +8,7 @@ CREATE TABLE venue (
     venue_capacity INT(10) NOT NULL,
     PRIMARY KEY(venue_id)
 );
-INSERT INTO venue (
-        venue_name,
-        venue_code,
-        venue_capacity
-    )
-VALUES("MPH", "MPH_21", 300);
+INSERT INTO venue (venue_name,venue_code,venue_capacity)VALUES("MPH", "MPH_21", 300);
 SELECT *
 FROM venue;
 -- ===================  BEACON TABLE    ===================----
