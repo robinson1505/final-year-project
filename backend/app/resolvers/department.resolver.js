@@ -1,10 +1,10 @@
-import { Department } from "../models/index.js";
+import { Department,Programs } from "../models/index.js";
 
 const departmentResolver = {
   Query: {
     getAllDepartments: async () => {
       try {
-        const departments = await Department.findAll();
+        const departments = await Department.findAll({include:Programs});
         return departments;
       } catch (error) {
         console.error("Error fetching departments data: ", error);

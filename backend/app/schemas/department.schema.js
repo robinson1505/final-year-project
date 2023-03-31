@@ -3,6 +3,7 @@ type Department{
     id:ID!
     department_name:String!
     department_code:String!
+    programs:[Program!]!
 }
 extend type Query{
     getAllDepartments:[Department]
