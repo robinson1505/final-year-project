@@ -1,4 +1,4 @@
-import { Student, Programs } from "../models/index.js";
+import { Student, Programs, Enrollment,Attendance } from "../models/index.js";
 import bcrypt from "bcrypt";
 const saltRounds = 10;
 
@@ -6,7 +6,9 @@ const studentResolver = {
   Query: {
     getAllStudents: async () => {
       try {
-        const students = await Student.findAll({ include: Programs });
+        const students = await Student.findAll({
+          include: [Programs, Enrollment,Attendance]
+        });
         return students;
       } catch (error) {
         console.error("Error fetching students data: ", error);
@@ -16,7 +18,7 @@ const studentResolver = {
     getStudent: async (parent, { id }) => {
       try {
         const student = await Student.findOne(
-          { include: Programs },
+          { include: [Programs, Enrollment,Attendance] },
           { where: { id } }
         );
         return student;

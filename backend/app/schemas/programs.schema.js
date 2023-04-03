@@ -6,6 +6,7 @@ type Program{
     nta_level:String!
     department:Department!
     students:[Student!]!
+    modules:[Modules!]!
 }
 extend type Query{
     getAllPrograms:[Program!]!

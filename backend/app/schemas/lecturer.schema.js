@@ -5,6 +5,7 @@ lecture_full_name:String!
 lecturer_staff_number:String!
 password:String!
 department:Department!
+modules:[Modules!]!
 }
 extend type Query{
     getAllLecturers:[Lecturer]

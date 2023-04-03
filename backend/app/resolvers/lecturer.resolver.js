@@ -1,4 +1,4 @@
-import { Lecturer, Department } from "../models/index.js";
+import { Lecturer, Department, Modules } from "../models/index.js";
 import bcrypt from "bcrypt";
 const saltRounds = 10;
 
@@ -6,7 +6,9 @@ const lecturerResolver = {
   Query: {
     getAllLecturers: async () => {
       try {
-        const lecturers = await Lecturer.findAll({ include: Department });
+        const lecturers = await Lecturer.findAll({
+          include: [Department, Modules]
+        });
         return lecturers;
       } catch (error) {
         console.error("Error fetching lecturers data: ", error);
@@ -15,7 +17,10 @@ const lecturerResolver = {
     },
     getLecturer: async (parent, { id }) => {
       try {
-        const lecturer = await Lecturer.findOne({ where: { id } });
+        const lecturer = await Lecturer.findOne({
+          include: [Department, Modules],
+          where: { id }
+        });
         return lecturer;
       } catch (error) {
         console.error("Error fetching lecturer data: ", error);
@@ -45,16 +50,17 @@ const lecturerResolver = {
       } catch (error) {
         console.error("Error there some field are null: ", error);
         throw new Error("Error on Adding Lecturer");
-      }r
+      }
+      r;
     },
     updateLecturer: async (
       parent,
       { id, lecturer_full_name, lecturer_staff_number, password }
     ) => {
-          const hashedPassword = await bcrypt.hash(password, saltRounds);
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
       try {
-        const  lecturer= await Lecturer.findOne({ where: { id } });
-    
+        const lecturer = await Lecturer.findOne({ where: { id } });
+
         student.update({
           lecturer_full_name,
           lecturer_staff_number,

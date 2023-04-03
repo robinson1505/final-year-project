@@ -5,6 +5,8 @@ type Student{
     student_registration_number:String!
     password:String!
     program:Program!
+    enrollments:[Enrollment!]!
+    attendances:[Attendance!]!
 }
 extend type Query{
     getAllStudents:[Student]

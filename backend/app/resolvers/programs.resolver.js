@@ -1,10 +1,10 @@
-import { Programs, Department,Student } from "../models/index.js";
+import { Programs, Department,Student,Modules } from "../models/index.js";
 
 const programsResolver = {
   Query: {
     getAllPrograms: async () => {
       try {
-        const programs = await Programs.findAll({ include: [Department,Student] });
+        const programs = await Programs.findAll({ include: [Department,Student,Modules] });
         return programs;
       } catch (error) {
         console.error("Error fetching programs data: ", error);
@@ -14,7 +14,7 @@ const programsResolver = {
     getProgram: async (parent, { id }) => {
       try {
         const program = await Programs.findOne({
-          include: { Department },
+          include:[Department,Student,Module] ,
           where: { id }
         });
         return program;
