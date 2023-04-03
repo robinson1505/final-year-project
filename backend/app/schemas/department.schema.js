@@ -7,7 +7,7 @@ type Department{
 }
 extend type Query{
     getAllDepartments:[Department]
-    getDepartment(id:ID!):Department
+    getDepartment(id:ID!):Department!
 }
 extend type Mutation{
     addDepartment(

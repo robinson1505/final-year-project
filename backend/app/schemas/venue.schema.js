@@ -22,7 +22,7 @@ extend type Mutation{
             id:ID!
             venue_name: String!
             venue_code: String!
-            venue_capacity:Int
+            venue_capacity:Int!
             ): Venue!
         
     deleteVenue(

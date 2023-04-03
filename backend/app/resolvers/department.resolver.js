@@ -13,7 +13,7 @@ const departmentResolver = {
     },
     getDepartment: async (parent, { id }) => {
       try {
-        const department = await Department.findOne({ where: { id } });
+        const department = await Department.findOne({include:Programs},{ where: { id } });
         return department;
       } catch (error) {
         console.error("Error fetching department data: ", error);
