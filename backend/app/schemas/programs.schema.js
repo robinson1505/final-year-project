@@ -5,9 +5,10 @@ type Program{
     program_name:String!
     nta_level:String!
     department:Department!
+    students:[Student!]!
 }
 extend type Query{
-    getAllPrograms:[Program!]
+    getAllPrograms:[Program!]!
     getProgram(id:ID):Program!
 }
 extend type Mutation{
