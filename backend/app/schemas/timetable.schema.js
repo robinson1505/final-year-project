@@ -25,10 +25,10 @@ extend type Mutation{
 
         updateTimetable(
             id:ID!
-            timetable_code:String!
-            module_day:String!
-            time_in:String!
-            time_out:String!
+            timetable_code:String
+            module_day:String
+            time_in:String
+            time_out:String
            
             ): Timetable!
         

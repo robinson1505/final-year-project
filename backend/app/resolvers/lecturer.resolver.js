@@ -49,7 +49,7 @@ const lecturerResolver = {
         return lecturer;
       } catch (error) {
         console.error("Error there some field are null: ", error);
-        throw new Error("Error on Adding Lecturer");
+        throw new Error(error);
       }
       r;
     },
@@ -61,7 +61,7 @@ const lecturerResolver = {
       try {
         const lecturer = await Lecturer.findOne({ where: { id } });
 
-        student.update({
+        lecturer.update({
           lecturer_full_name,
           lecturer_staff_number,
           password: hashedPassword

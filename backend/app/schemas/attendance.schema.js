@@ -11,7 +11,7 @@ attendance_code:String!
 attendance_status:AttendanceStatus!
 student:Student!
 module:Modules!
-timetable:Timetable
+timetable:Timetable!
 
 }
 extend type Query{
@@ -21,17 +21,17 @@ getAttendance(id:ID):Attendance
 extend type Mutation{
     addAttendance( 
         attendance_code:String!
-        attendance_status:AttendanceStatus!
+        attendance_status:AttendanceStatus
         student_attendance:String!
         attendance_module:String!
         attendance_timetable:ID!
-        timetable_venue:ID!
+        
       
         ):Attendance!
 
         updateAttendance(
             id:ID!
-            attendance_code:String!
+            attendance_code:String
             attendance_status:AttendanceStatus!
            
             ): Attendance!

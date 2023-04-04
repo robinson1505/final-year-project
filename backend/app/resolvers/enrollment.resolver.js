@@ -1,10 +1,12 @@
-import { Enrollment } from "../models/index.js";
+import { Enrollment, Student, Modules } from "../models/index.js";
 
 const enrollmentResolver = {
   Query: {
     getAllEnrollment: async () => {
       try {
-        const enrollments = await Enrollment.findAll();
+        const enrollments = await Enrollment.findAll({
+          include: [Student, Modules]
+        });
         return enrollments;
       } catch (error) {
         console.error("Error fetching enrollments data: ", error);
@@ -13,7 +15,10 @@ const enrollmentResolver = {
     },
     getEnrollment: async (parent, { id }) => {
       try {
-        const enrollment = await Enrollment.findOne({ where: { id } });
+        const enrollment = await Enrollment.findOne({
+          include: [Student, Modules],
+          where: { id }
+        });
         return enrollment;
       } catch (error) {
         console.error("Error fetching enrollment data: ", error);

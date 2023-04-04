@@ -2,7 +2,7 @@ const enrollmentDefs = `
 type Enrollment{
     id:ID!
     semester:Int!
-    academic:String!
+    academic_year:String!
     student:Student!
     module:Modules!
 }
@@ -12,7 +12,7 @@ extend type Query{
 }
 extend type Mutation{
     addEnrollment( 
-        semester:String!
+        semester:Int!
         academic_year:String!
         student_enrollment:ID!
         module_enrolled:ID!
@@ -21,8 +21,8 @@ extend type Mutation{
 
         updateEnrollment(
             id:ID!
-            semester:String!
-            academic_year:String!
+            semester:Int
+            academic_year:String
            
             ): Enrollment!
         

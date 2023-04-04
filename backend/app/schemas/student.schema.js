@@ -20,6 +20,7 @@ extend type Mutation{
         student_program:String!
         ):Student!
     updateStudent(
+        id:ID!
         student_full_name:String
         student_registration_number:String
         password:String

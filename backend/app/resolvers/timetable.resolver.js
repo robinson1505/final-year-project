@@ -15,7 +15,10 @@ const timetableResolver = {
     },
     getTimetable: async (parent, { id }) => {
       try {
-        const timetable = await Timetable.findOne({ where: { id } });
+        const timetable = await Timetable.findOne({
+          include: [Modules, Venue],
+          where: { id }
+        });
         return timetable;
       } catch (error) {
         console.error("Error fetching timetable data: ", error);

@@ -41,10 +41,14 @@ Programs.hasMany(Student, { foreignKey: "student_program" });
 Student.belongsTo(Programs, { foreignKey: "student_program" });
 
 Programs.hasMany(Modules, { foreignKey: "module_program" });
-Modules.belongsTo(Programs, { foreignKey: "module_program" });
+Modules.belongsTo(Programs, {
+  foreignKey: { notNull: true, name: "module_program" }
+});
 
 Lecturer.hasMany(Modules, { foreignKey: "lecturer_module" });
-Modules.belongsTo(Lecturer, { foreignKey: "lecturer_module" });
+Modules.belongsTo(Lecturer, {
+  foreignKey: { notNull: true, name: "lecturer_module" }
+});
 
 Modules.hasMany(Timetable, { foreignKey: "timetable_module" });
 Timetable.belongsTo(Modules, { foreignKey: "timetable_module" });
@@ -61,7 +65,7 @@ Attendance.belongsTo(Modules, { foreignKey: "attendance_module" });
 Timetable.hasMany(Attendance, { foreignKey: "attendance_timetable" });
 Attendance.belongsTo(Timetable, { foreignKey: "attendance_timetable" });
 
-export  {
+export {
   Attendance,
   Beacon,
   Department,

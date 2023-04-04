@@ -1,7 +1,7 @@
 const lecturerDefs = `
 type Lecturer{
 id:ID!
-lecture_full_name:String!
+lecturer_full_name:String!
 lecturer_staff_number:String!
 password:String!
 department:Department!
@@ -16,9 +16,10 @@ extend type Mutation{
         lecturer_full_name:String!
         lecturer_staff_number:String!
         password:String!
-        lecturer_Department:String!
+        lecturer_department:String!
         ):Lecturer!
     updateLecturer(
+        id:ID!
         lecturer_full_name:String
         lecturer_staff_number:String
         password:String

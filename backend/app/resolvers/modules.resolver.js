@@ -30,7 +30,7 @@ const modulesResolver = {
         module_name,
         module_code,
         number_of_students,
-        module_Program,
+        module_program,
         lecturer_module
       }
     ) => {
@@ -39,7 +39,7 @@ const modulesResolver = {
           module_name,
           module_code,
           number_of_students,
-          module_Program,
+          module_program,
           lecturer_module
         });
         return modules.toJSON();

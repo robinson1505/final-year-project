@@ -16,16 +16,16 @@ extend type Mutation{
     addModule( 
         module_name:String!
         module_code:String!
-        number_of_student:String!
+        number_of_students:Int!
         module_program:ID!
         lecturer_module:ID!
         ):Modules!
 
         updateModule(
             id:ID!
-            module_name:String!
-            module_code:String!
-            number_of_student:String!
+            module_name:String
+            module_code:String
+            number_of_student:String
             ): Modules!
         
         deleteModule(

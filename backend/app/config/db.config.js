@@ -15,7 +15,7 @@ const sequelize = new Sequelize(
   }
 );
 
-  // sequelize.sync({ force: true });
+  // sequelize.sync({ alter: true });
 // ? CHECK FOR CONNECTION
 sequelize
   .authenticate()
