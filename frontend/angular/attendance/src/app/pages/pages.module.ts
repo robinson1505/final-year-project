@@ -9,7 +9,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StudentsComponent } from './components/students/students/students.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
 import { ModulesComponent } from './components/modules/modules.component';
+import { LoginComponent } from './components/login/login.component';
 import { ModuleStudentsComponent } from './components/students/module-students/module-students.component';
+
 
 const pageComponents = [
   CardsComponent,
@@ -18,10 +20,11 @@ const pageComponents = [
   AttendanceComponent,
   ModulesComponent,
   ModuleStudentsComponent,
+  LoginComponent,
 ];
 
 @NgModule({
-  declarations: [pageComponents],
+  declarations: [pageComponents, ],
   imports: [MaterialModule, CommonModule, SharedModule, FontAwesomeModule,RouterModule],
   exports: [pageComponents],
 })
