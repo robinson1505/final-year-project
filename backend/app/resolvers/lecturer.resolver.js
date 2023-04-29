@@ -1,9 +1,48 @@
 import { Lecturer, Department, Modules } from "../models/index.js";
+// import { getToken } from "../utils/utils.js";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+dotenv.config("../../../.env");
+import { GraphQLError } from "graphql";
 const saltRounds = 10;
+
+// const generateToken = user => {
+//   const payload = {
+//     user: {
+//       id: user.id
+//     }
+//   };
+//   return jwt.sign(payload, process.env.SECRET, { expiresIn: "24h" });
+// };
 
 const lecturerResolver = {
   Query: {
+      me: async (parent, args, context, info) => {
+        console.log(context.user)
+        console.log("context only",context.user.user.id)
+        try {
+          const id = context.user.user.id;
+          console.log(id);
+          if (!id) {
+            throw new Error("User not authenticated");
+          }
+          const lecturer = await Lecturer.findOne({
+            where: { id }
+          });
+          return lecturer;
+        } catch (error) {
+          console.log("Error fetching lecturer: ", error);
+          throw new Error(error);
+        }
+
+        // if (!user.id) {
+        //   console.log("hey");
+        //   throw new Error(error);
+        // }
+
+        // return lecturer;
+      },
     getAllLecturers: async () => {
       try {
         const lecturers = await Lecturer.findAll({
@@ -80,6 +119,39 @@ const lecturerResolver = {
       } catch (error) {
         console.error("Error there can not find the lecturer: ", error);
         throw new Error("Error on deleting lecturer");
+      }
+    },
+    login: async (_, args, context, info) => {
+      try {
+        const lecturer = await Lecturer.findOne({
+          where: { lecturer_staff_number: args.lecturer_staff_number }
+        });
+        if (!lecturer) {
+          throw new Error("There are is no lecturer with that staff number");
+        }
+        const isMatch = await bcrypt.compare(args.password, lecturer.password);
+        if (!isMatch) {
+          throw new Error("Invalid credential");
+        }
+        const token = jwt.sign(
+          {
+            user: { id: lecturer.id, username: lecturer.lecturer_staff_number }
+          },
+          "MyPrivate",
+          { expiresIn: 604800 }
+        );
+        // const token = generateToken(lecturer);
+        // const token = getToken(lecturer);
+        // console.log(
+        //   "Lecturers",
+        //   lecturer.lecturer_staff_number,
+        //   "and the token is",
+        //   token
+        // );
+        console.log(token);
+        return token;
+      } catch (error) {
+        throw new GraphQLError(error);
       }
     }
   }
