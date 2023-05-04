@@ -7,8 +7,9 @@ password:String!
 department:Department!
 modules:[Modules!]!
 }
-type Payload{
-    token:String
+input LoginInputs{
+    lecturer_staff_number :String!
+    password:String!
 }
 
 extend type Query{
@@ -34,14 +35,10 @@ extend type Mutation{
         id:ID!
         ): Boolean!
     login(
-        lecturer_staff_number:String!
+        lecturer_staff_number :String!
         password:String!
         ):String!
 }
 `;
 export default lecturerDefs;
 
-// type Login{
-//     token:String!
-//     lecturer:Lecturer
-// }
