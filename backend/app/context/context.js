@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import throwCustomError, { ErrorTypes } from "../helpers/error.helper.js";
 
-const getUser = async token => {
+const getUser = async (token) => {
   try {
     if (token) {
       const user = jwt.verify(token, "MyPrivate");
@@ -9,11 +9,14 @@ const getUser = async token => {
     }
     return null;
   } catch (error) {
+    console.log(error);
     return null;
   }
 };
 
 const context = async ({ req, res }) => {
+  console.log("reaches here....................");
+  // console.log("request for headers..........",req.headers.authorization);
   // console.log(req.body.operationName);
   if (req.body.operationName === "IntrospectionQuery") {
     // console.log("blocking introspection query..");
@@ -26,13 +29,14 @@ const context = async ({ req, res }) => {
   ) {
     return {};
   }
-
   // get the user token from the headers
   const token = req.headers.authorization || "";
-
+  console.log("THIS IS THE CONTEXT TOKEN", token);
   // try to retrieve a user with the token
-  const user = await getUser(token);
 
+  const user = await getUser(JSON.parse(token));
+  // const user = await getUser(token);
+  console.log("USERS ...........", user);
   if (!user) {
     throwCustomError("User is not Authenticated", ErrorTypes.UNAUTHENTICATED);
   }
@@ -40,5 +44,4 @@ const context = async ({ req, res }) => {
   // add the user to the context
   return { user };
 };
-
 export default context;

@@ -1,4 +1,4 @@
-import { Lecturer, Department, Modules } from "../models/index.js";
+import { Lecturer, Department, Modules, Timetable } from "../models/index.js";
 // import { getToken } from "../utils/utils.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
@@ -18,35 +18,28 @@ const saltRounds = 10;
 
 const lecturerResolver = {
   Query: {
-      me: async (parent, args, context, info) => {
-        console.log(context.user)
-        console.log("context only",context.user.user.id)
-        try {
-          const id = context.user.user.id;
-          console.log(id);
-          if (!id) {
-            throw new Error("User not authenticated");
-          }
-          const lecturer = await Lecturer.findOne({
-            where: { id }
-          });
-          return lecturer;
-        } catch (error) {
-          console.log("Error fetching lecturer: ", error);
-          throw new Error(error);
+    me: async (parent, args, context, info) => {
+      console.log(context.user);
+      console.log("context only", context.user.user.id);
+      try {
+        const id = context.user.user.id;
+        console.log(id);
+        if (!id) {
+          throw new Error("User not authenticated");
         }
-
-        // if (!user.id) {
-        //   console.log("hey");
-        //   throw new Error(error);
-        // }
-
-        // return lecturer;
-      },
+        const lecturer = await Lecturer.findOne({
+          where: { id },
+        });
+        return lecturer;
+      } catch (error) {
+        console.log("Error fetching lecturer: ", error);
+        throw new Error(error);
+      }
+    },
     getAllLecturers: async () => {
       try {
         const lecturers = await Lecturer.findAll({
-          include: [Department, Modules]
+          include: [Department, Modules],
         });
         return lecturers;
       } catch (error) {
@@ -58,14 +51,33 @@ const lecturerResolver = {
       try {
         const lecturer = await Lecturer.findOne({
           include: [Department, Modules],
-          where: { id }
+          where: { id },
         });
         return lecturer;
       } catch (error) {
         console.error("Error fetching lecturer data: ", error);
         throw new Error("Error fetching lecturer data");
       }
-    }
+    },
+    getLecturerTimetable: async (parent, args, context, info) => {
+      console.log(context.user);
+      console.log("context only", context.user.user.id);
+      try {
+        const id = context.user.user.id;
+        console.log(id);
+        if (!id) {
+          throw new Error("User not authenticated");
+        }
+        const lecturerTimetable = await Lecturer.findAll({
+          include:[{model:Modules,include:[Timetable]}],
+          where: { id },
+        });
+        console.log("This is Lecturer Timetable",JSON.stringify(lecturerTimetable))
+        return lecturerTimetable
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   Mutation: {
     addLecturer: async (
@@ -74,7 +86,7 @@ const lecturerResolver = {
         lecturer_full_name,
         lecturer_staff_number,
         password,
-        lecturer_department
+        lecturer_department,
       }
     ) => {
       const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -83,7 +95,7 @@ const lecturerResolver = {
           lecturer_full_name,
           lecturer_staff_number,
           password: hashedPassword,
-          lecturer_department
+          lecturer_department,
         });
         return lecturer;
       } catch (error) {
@@ -103,7 +115,7 @@ const lecturerResolver = {
         lecturer.update({
           lecturer_full_name,
           lecturer_staff_number,
-          password: hashedPassword
+          password: hashedPassword,
         });
         return lecturer;
       } catch (error) {
@@ -124,7 +136,7 @@ const lecturerResolver = {
     login: async (_, args, context, info) => {
       try {
         const lecturer = await Lecturer.findOne({
-          where: { lecturer_staff_number: args.lecturer_staff_number }
+          where: { lecturer_staff_number: args.lecturer_staff_number },
         });
         if (!lecturer) {
           throw new Error("There are is no lecturer with that staff number");
@@ -135,10 +147,10 @@ const lecturerResolver = {
         }
         const token = jwt.sign(
           {
-            user: { id: lecturer.id, username: lecturer.lecturer_staff_number }
+            user: { id: lecturer.id, username: lecturer.lecturer_staff_number },
           },
           "MyPrivate",
-          { expiresIn: 604800 }
+          { expiresIn: "1h" }
         );
         // const token = generateToken(lecturer);
         // const token = getToken(lecturer);
@@ -153,8 +165,8 @@ const lecturerResolver = {
       } catch (error) {
         throw new GraphQLError(error);
       }
-    }
-  }
+    },
+  },
 };
 
 export default lecturerResolver;

@@ -15,58 +15,26 @@ import context from './app/context/context.js';
 const app =express();
 const httpServer = http.createServer(app);
 
+
 const server = new ApolloServer({
 typeDefs,
 resolvers,
 includeStacktraceInErrorResponses: false,
 introspection: true,
-// context:({req}) =>{
-//   console.log('Request:', req);
-//   const token = req.headers.authorization || '';
-//   console.log("token: ", token)
-
-//   try {
-//     const decodedToken = jwt.verify(token, 'Roeman emmannuel');
-//     console.log(decodedToken); 
-//     const user = decodedToken.user;
-//     console.log(`Authenticated user: ${user.username}`);
-//     return { user:{id:user.id,username: user.username }};
-//   } catch (error) {
-//     console.error(`Failed to authenticate user: ${error.message}`);
-//     throw new Error("Failed to authenticate user");
-//   }
-
-// },
-// plugins:[authMiddleware]
-    // // get the user token from the headers
-    // const token = req.headers.authorization || '';
-    // console.log("app.mjs token: ",token)
-    // // try to retrieve a user with the token
-    // const  lecturer = getPayload(token);
-    // console.log(lecturer);
-    // if(!lecturer){
-    //   throw new GraphQLError('User is not authenticated', {
-    //     extensions: {
-    //       code: 'UNAUTHENTICATED',
-    //       http: { status: 401 },
-    //     },
-    //   });
-    // }
-    
-    // // add the user to the context
-    // return lecturer;
-
-
 
 
   });
   
   await server.start();
   app.use('/attendance', 
-  cors({credentials: true,}),
+  cors({
+    origin:["http://localhost:4200"],
+    credentials:true
+  }),
   bodyParser.json(), 
   expressMiddleware(server,{
-    context:context
+    context:context,
+    
   })
   
   );

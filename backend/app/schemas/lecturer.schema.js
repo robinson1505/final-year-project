@@ -7,15 +7,11 @@ password:String!
 department:Department!
 modules:[Modules!]!
 }
-input LoginInputs{
-    lecturer_staff_number :String!
-    password:String!
-}
-
 extend type Query{
     getAllLecturers:[Lecturer]
     getLecturer(id:ID):Lecturer
     me:Lecturer!
+    getLecturerTimetable:[Lecturer]
 }
 
 extend type Mutation{
