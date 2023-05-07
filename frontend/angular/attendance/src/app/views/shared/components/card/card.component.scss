@@ -1,0 +1,51 @@
+.card {
+  border: 0;
+  border-radius: 10px !important;
+}
+.card-body{
+  padding: 0;
+  margin: 0;
+}
+.handIcon {
+  cursor: pointer;
+}
+.card-header-sub {
+  padding: 0.1rem 1.25rem !important;
+  font-size: 18px;
+}
+.card-header {
+  padding: 0.65rem 1.25rem !important;
+}
+.header-icon {
+  margin-top: 8px;
+  font-size: 20px;
+}
+.card-primary {
+  background-color: #01B3EF !important;
+  color: #fff;
+}
+.card-secondary {
+  background-color: #2d3e51 !important;
+  color: #fff;
+}
+.c-button {
+  padding: 0.275rem 0.75rem;
+  min-width: 96px;
+}
+.card-footer-primary{
+  border: 0;
+  background-color: rgba(53, 189, 156,0.2) !important;
+}
+.card-footer-secondary{
+  border: 0;
+  background-color:rgba(45, 62, 81, 0.2) !important;
+
+}
+.btn-success{
+  background-color: green !important;
+  color: white;
+}
+.btn-danger{
+  background-color:  red !important;
+  color: white;
+}

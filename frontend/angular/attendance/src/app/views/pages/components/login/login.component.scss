@@ -1,0 +1,44 @@
+section {
+  background-image: url("../../../../../assets/images/logo.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+section::before {
+  content: "";
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.pic {
+  border-right: 3px solid #01B3EF;
+}
+mat-form-field {
+  width: 100%;
+ }
+
+.img {
+  width: 30%;
+  height: 30%;
+}
+button {
+  border: 2px solid #01B3EF!important;
+  width: 50%;
+}
+button:hover {
+  background-color:#01B3EF !important;
+  color: white;
+  border: 2px solid white !important;
+}
+.description{
+  color: #01B3EF !important;
+}
