@@ -1,4 +1,10 @@
-import { Lecturer, Department, Modules, Timetable } from "../models/index.js";
+import {
+  Lecturer,
+  Department,
+  Modules,
+  Timetable,
+  Venue,
+} from "../models/index.js";
 // import { getToken } from "../utils/utils.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
@@ -65,15 +71,19 @@ const lecturerResolver = {
       try {
         const id = context.user.user.id;
         console.log(id);
-        if (!id) {
-          throw new Error("User not authenticated");
+        if (id) {
+          const modules = await Modules.findAll({
+            where: { lecturer_module: id },
+            include: [{ model: Timetable, include: [{ model: Venue }] }],
+          });
+                
+            console.log("moduleID", modules.dataValues);
+          return modules;
+          // if(modules){
+          //   const timetable = await Timetable.findAll({where:{timetable_module:modules.id}});
+          //   return timetable
+          // }
         }
-        const lecturerTimetable = await Lecturer.findAll({
-          include:[{model:Modules,include:[Timetable]}],
-          where: { id },
-        });
-        console.log("This is Lecturer Timetable",JSON.stringify(lecturerTimetable))
-        return lecturerTimetable
       } catch (error) {
         console.log(error);
       }

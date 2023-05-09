@@ -34,8 +34,8 @@ const context = async ({ req, res }) => {
   console.log("THIS IS THE CONTEXT TOKEN", token);
   // try to retrieve a user with the token
 
-  const user = await getUser(JSON.parse(token));
-  // const user = await getUser(token);
+  // const user = await getUser(JSON.parse(token));
+  const user = await getUser(token);
   console.log("USERS ...........", user);
   if (!user) {
     throwCustomError("User is not Authenticated", ErrorTypes.UNAUTHENTICATED);

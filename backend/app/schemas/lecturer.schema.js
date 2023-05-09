@@ -11,7 +11,7 @@ extend type Query{
     getAllLecturers:[Lecturer]
     getLecturer(id:ID):Lecturer
     me:Lecturer!
-    getLecturerTimetable:[Lecturer]
+    getLecturerTimetable:[Modules]
 }
 
 extend type Mutation{
