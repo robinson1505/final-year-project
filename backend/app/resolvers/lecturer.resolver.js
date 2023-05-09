@@ -11,6 +11,7 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config("../../../.env");
 import { GraphQLError } from "graphql";
+
 const saltRounds = 10;
 
 // const generateToken = user => {
@@ -77,12 +78,13 @@ const lecturerResolver = {
             include: [{ model: Timetable, include: [{ model: Venue }] }],
           });
                 
-            console.log("moduleID", modules.dataValues);
-          return modules;
-          // if(modules){
-          //   const timetable = await Timetable.findAll({where:{timetable_module:modules.id}});
-          //   return timetable
-          // }
+            console.log("moduleID", modules[0].id);
+          if(modules.length > 0){
+            const lecturerModuleId = modules[0].id;
+            console.log("Module Id",lecturerModuleId)
+            const timetable = await Timetable.findAll({where:{timetable_module:lecturerModuleId},include:[Modules,Venue]});
+            return timetable;
+          }
         }
       } catch (error) {
         console.log(error);
