@@ -6,7 +6,7 @@ import {
   InMemoryCache,
 } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
-// import { setContext } from '@apollo/client/link/context';
+
 import { HttpHeaders } from '@angular/common/http';
 
 const uri = 'http://localhost:4000/attendance'; // <-- add the URL of the GraphQL server here

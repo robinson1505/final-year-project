@@ -12,12 +12,16 @@ query{
   getLecturerTimetable {
     id
     timetable_code
+    time_in
+    time_out
+    module_day
    module {
      module_name
      module_code
    }
    venue {
      venue_name
+     venue_capacity
    }
 
   }

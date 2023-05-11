@@ -1,40 +1,25 @@
 import { Injectable } from '@angular/core';
-import { gql, Apollo } from 'apollo-angular';
-import { BehaviorSubject } from 'rxjs';
-import { LoginResult } from '../model/auth.model';
-import Login from '../resolvers/lecturer.resolver';
+import { Apollo } from 'apollo-angular';
+import { map } from 'rxjs/operators';
+import { Timetable } from 'src/app/model/timetable.model';
+import { GET_LECTURER_TIMETABLE } from 'src/app/queries/lecturer.query';
 
+@Injectable()
+export class LecturerService {
+  constructor(private apollo: Apollo) {}
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthService {
-  isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  constructor(private apollo: Apollo) {
-    if (localStorage.getItem('token')) this.isAuthenticated.next(true);
-    else this.isAuthenticated.next(false);
-  }
-
-  login(lecturerStaffNumber: string, password: string) {
+  allLecturerTimetable: Timetable[] = [];
+  getLecturerTimetable() {
     this.apollo
-      .mutate<LoginResult>({
-        mutation: Login,
-        variables: { lecturerStaffNumber, password },
+      .watchQuery<{ getLecturerTimetable: Timetable[] }>({
+        query: GET_LECTURER_TIMETABLE,
       })
-      .subscribe((result) => {
-        // console.log('This is my payload: ', result.data?.login);
-        const token = result.data?.login;
-        localStorage.setItem('token', JSON.stringify(token));
-        // console.log('this is the token', token);
-        // console.log("Json: ",JSON.stringify(token))
-        this.isAuthenticated.next(true);
-        window.location.href = '/dashboard';
-      });
-  }
-
-  logout() {
-    localStorage.removeItem('token');
-    this.isAuthenticated.next(false);
-    window.location.href = '/';
+      .valueChanges.pipe(
+        map((result) => {
+          console.log('Result:  ', result);
+          this.allLecturerTimetable = result.data.getLecturerTimetable;
+        })
+      )
+      .subscribe();
   }
 }

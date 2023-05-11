@@ -8,6 +8,7 @@ import { PagesModule } from '../pages/pages.module';
 
 @NgModule({
   declarations: [DashboardComponent],
+  
   imports: [CommonModule, RouterModule,MaterialModule, SharedModule, PagesModule],
 })
 export class DashboardModule {}

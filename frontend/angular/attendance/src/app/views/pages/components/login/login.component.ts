@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // import { Apollo } from 'apollo-angular';
-import { AuthService } from 'src/app/services/lecturer.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { faUser, faEye } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -11,7 +11,7 @@ import { faUser, faEye } from '@fortawesome/free-solid-svg-icons';
 export class LoginComponent {
   faUser = faUser;
   faEye = faEye;
-   lecturerStaffNumber: string = '';
+  lecturerStaffNumber: string = '';
   password: string = '';
   constructor(private authService:AuthService) {}
 

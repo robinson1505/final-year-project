@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Lecturer } from 'src/app/model/lecturer.model';
 import { GET_LECTURER } from 'src/app/queries/lecturer.query';
-import { AuthService } from 'src/app/services/lecturer.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-toolbar',

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import GET_VENUES from '../../../../services/venue.services';
-import { Venue } from '../../../../model/venue.model';
 import {
   faHourglassStart,
   faHourglassEnd,
   faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
+import { map } from 'rxjs';
+import { Timetable } from 'src/app/model/timetable.model';
+import { GET_LECTURER_TIMETABLE } from 'src/app/queries/lecturer.query';
 
 @Component({
   selector: 'app-sessions',
@@ -17,20 +18,22 @@ export class SessionsComponent implements OnInit {
   faHourglassStart = faHourglassStart;
   faHourglassEnd = faHourglassEnd;
   faLocationDot = faLocationDot;
-  allVenues: Venue[] = [];
+
 
   constructor(private apollo: Apollo) {}
-
+  allLecturerTimetable: Timetable[]=[];
+  panelOpenState = false;
   ngOnInit(): void {
     this.apollo
-      .watchQuery<any>({ query: GET_VENUES })
-      .valueChanges.subscribe(({ data, loading }) => {
-        if (loading === true) {
-          console.log('loading.........................');
-        } else {
-          this.allVenues = data.getAllVenues;
-        }
-      });
+      .watchQuery<{ getLecturerTimetable: Timetable[] }>({
+        query: GET_LECTURER_TIMETABLE,
+      })
+      .valueChanges.pipe(
+        map((result) => {
+          console.log('Result:  ', result);
+          this.allLecturerTimetable = result.data.getLecturerTimetable;
+        })
+      ).subscribe();
   }
 
   cardSetting = [
@@ -53,4 +56,19 @@ export class SessionsComponent implements OnInit {
       style: 'secondary',
     },
   ];
+
+
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
 }

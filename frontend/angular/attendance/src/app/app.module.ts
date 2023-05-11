@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardModule } from './views/layouts/dashboard.module';
 import { GraphQLModule } from './services/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './services/lecturer.service';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({

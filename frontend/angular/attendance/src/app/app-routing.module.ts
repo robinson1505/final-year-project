@@ -7,6 +7,7 @@ import { DashboardComponent } from './views/layouts/dashboard/dashboard.componen
 import { SessionsComponent } from './views/pages/components/sessions/sessions.component';
 import { AttendanceComponent } from './views/pages/components/attendance/attendance.component';
 import { LoginComponent } from './views/pages/components/login/login.component';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   {
@@ -15,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: DashboardComponent,canActivate:[AuthService],
     children: [
       { path: '', component: SessionsComponent },
       { path: 'module', component: ModulesComponent },

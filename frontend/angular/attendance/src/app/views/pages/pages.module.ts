@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { MaterialModule } from './../material/material/material.module'
+import {LecturerService }from '../../services/lecturer.service'
 import { CardsComponent } from './components/cards/cards.component';
-import { MaterialModule } from './../material/material/material.module';
+;
 import { SharedModule } from './../shared/shared.module';
-import { MapToIterable } from 'src/app/pipes/map.pipe';
-
 import { SessionsComponent } from './components/sessions/sessions.component';
 import { StudentsComponent } from './components/students/students/students.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
@@ -27,8 +27,9 @@ const pageComponents = [
 ];
 
 @NgModule({
-  declarations: [pageComponents, MapToIterable],
+  declarations: [pageComponents,],
   imports: [MaterialModule, CommonModule, SharedModule, FontAwesomeModule,RouterModule,FormsModule],
   exports: [pageComponents],
+  providers:[LecturerService]
 })
 export class PagesModule {}
