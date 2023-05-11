@@ -9,5 +9,5 @@ export interface Modules {
   number_of_students: number;
   program: Programs;
   lecturer: Lecturer;
-  timetables: [Timetable];
+  timetables: Timetable[];
 }

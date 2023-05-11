@@ -7,5 +7,20 @@ const GET_LECTURER = gql`
     }
   }
 `;
+const GET_LECTURER_TIMETABLE = gql`
+query{
+  getLecturerTimetable {
+    id
+    timetable_code
+   module {
+     module_name
+     module_code
+   }
+   venue {
+     venue_name
+   }
 
-export default GET_LECTURER;
+  }
+}
+`
+export {GET_LECTURER,GET_LECTURER_TIMETABLE};

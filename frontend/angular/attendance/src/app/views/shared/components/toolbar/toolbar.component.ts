@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Lecturer } from 'src/app/model/lecturer.model';
-import GET_LECTURER from 'src/app/queries/lecturer.query';
+import { GET_LECTURER } from 'src/app/queries/lecturer.query';
 import { AuthService } from 'src/app/services/lecturer.service';
 
 @Component({

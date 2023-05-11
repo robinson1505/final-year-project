@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CardsComponent } from './components/cards/cards.component';
 import { MaterialModule } from './../material/material/material.module';
 import { SharedModule } from './../shared/shared.module';
+import { MapToIterable } from 'src/app/pipes/map.pipe';
 
 import { SessionsComponent } from './components/sessions/sessions.component';
 import { StudentsComponent } from './components/students/students/students.component';
@@ -26,7 +27,7 @@ const pageComponents = [
 ];
 
 @NgModule({
-  declarations: [pageComponents, ],
+  declarations: [pageComponents, MapToIterable],
   imports: [MaterialModule, CommonModule, SharedModule, FontAwesomeModule,RouterModule,FormsModule],
   exports: [pageComponents],
 })
