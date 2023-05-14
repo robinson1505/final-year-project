@@ -18,6 +18,10 @@ query{
    module {
      module_name
      module_code
+     number_of_students
+     program{
+      program_name
+     }
    }
    venue {
      venue_name

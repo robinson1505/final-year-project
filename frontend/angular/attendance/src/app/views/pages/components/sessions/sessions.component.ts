@@ -36,39 +36,4 @@ export class SessionsComponent implements OnInit {
       ).subscribe();
   }
 
-  cardSetting = [
-    {
-      header: true,
-      day: 'Friday',
-      module: 'Web Development',
-      venue: 'MPH',
-      time: '17:00 - 19:00',
-      footer: true,
-      style: 'primary',
-    },
-    {
-      header: true,
-      day: 'Friday',
-      module: 'Research Methodology',
-      venue: 'Class II',
-      time: '17:00 - 19:00',
-      footer: true,
-      style: 'secondary',
-    },
-  ];
-
-
-  step = 0;
-
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
-  }
-}
+ }
