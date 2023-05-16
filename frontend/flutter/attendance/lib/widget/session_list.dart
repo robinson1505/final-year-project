@@ -11,31 +11,48 @@ class SessionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      if (timetableController.isLoading.value) {
-        return const Center(
-          child: SpinKitFadingCircle(
-          
-            color: Color.fromRGBO(
-              53,
-              190,
-              156,
-              1,
-            ),
-          ),
-        );
-      } else {
-        return GridView.builder(
-          shrinkWrap: true,
-          itemCount: timetableController.timetableList.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2),
-          itemBuilder: (context, index) {
-            return SessionCard(
-                timetable: timetableController.timetableList[index]);
-          },
-        );
-      }
-    });
+    return GridView.builder(
+      shrinkWrap: true,
+      gridDelegate:
+          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      itemBuilder: (context, index) {
+        return const SessionCard();
+      },
+    );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+  // return GridView.builder(
+  //     shrinkWrap: true,
+  //     itemCount: timetableController.timetableList.length,
+  //     gridDelegate:
+  //         const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+  //     itemBuilder: (context, index) {
+  //       return const SessionCard();
+  //     },
+  //   );
+
+//  Obx(() {
+//       if (timetableController.isLoading.value) {
+//         return const Center(
+//           child: SpinKitFadingCircle(
+          
+//             color: Color.fromRGBO(
+//               53,
+//               190,
+//               156,
+//               1,
+//             ),
+//           ),
+//         );
+//       }

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:attendance/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   startTimer() async {
-    var duration = const Duration(seconds: 3);
+    var duration = const Duration(seconds: 1);
     return Timer(duration, loginRoute);
   }
 

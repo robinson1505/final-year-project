@@ -3,7 +3,7 @@ import 'package:attendance/screens/home_screen.dart';
 import 'package:attendance/widget/input_field.dart';
 import 'package:attendance/widget/submit_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,37 +13,36 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  LoginController loginController = Get.put(LoginController());
+  // LoginController loginController = Get.put(LoginController());
 
-  var isLogin = false.obs;
+  // var isLogin = false.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(36),
-        child: Obx(() => Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  "assets/images/logo.png",
-                  width: 100,
-                  height: 100,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  "Welcome Student",
-                  style: TextStyle(
-                      fontSize: 28,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400),
-                ),
-                !isLogin.isTrue ? loginWidget() : const HomeScreen()
-              ],
-            )),
-      ),
+          padding: const EdgeInsets.all(36),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/images/logo.png",
+                width: 100,
+                height: 100,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "Welcome Student",
+                style: TextStyle(
+                    fontSize: 28,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400),
+              ),
+              loginWidget()
+            ],
+          )),
     );
   }
 
@@ -53,18 +52,21 @@ class _LoginScreenState extends State<LoginScreen> {
         const SizedBox(
           height: 20,
         ),
-        InputTextFieldWidget(
-            loginController.regNumberController, 'Registration Number', false),
+        const InputTextFieldWidget(),
         const SizedBox(
           height: 20,
         ),
-        InputTextFieldWidget(
-            loginController.passwordController, 'password', true),
+        const InputTextFieldWidget(),
         const SizedBox(
           height: 20,
         ),
         SubmitButton(
-          onPressed: () => print(loginController.loginWithRegNumber()),
+          onPressed: () => {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            )
+          },
           title: 'Login',
         )
       ],

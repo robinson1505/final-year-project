@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 class InputTextFieldWidget extends StatelessWidget {
-  final TextEditingController textEditingController;
-  final String hintText;
-  final bool hidePassword ;
- const InputTextFieldWidget(this.textEditingController, this.hintText, this.hidePassword,
+  // final TextEditingController textEditingController;
+  // final String hintText;
+  // final bool hidePassword ;
+ const InputTextFieldWidget(
       {super.key});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return const SizedBox(
       height: 46,
       child: TextField(
-        obscureText: hidePassword,
-        controller: textEditingController,
+        // obscureText: hidePassword,
+        // controller: textEditingController,
         decoration: InputDecoration(
           alignLabelWithHint: true,
-          focusedBorder: const UnderlineInputBorder(
+          focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
             color: Color.fromRGBO(
               53,
@@ -25,8 +25,8 @@ class InputTextFieldWidget extends StatelessWidget {
             ),
           )),
           fillColor: Colors.white54,
-          hintText: hintText,
-          hintStyle: const TextStyle(
+          // hintText: hintText,
+          hintStyle: TextStyle(
             color: Color.fromRGBO(
               53,
               190,
@@ -34,8 +34,8 @@ class InputTextFieldWidget extends StatelessWidget {
               1,
             ),
           ),
-          contentPadding: const EdgeInsets.only(bottom: 15),
-          focusColor: const Color.fromRGBO(
+          contentPadding: EdgeInsets.only(bottom: 15),
+          focusColor: Color.fromRGBO(
             53,
             190,
             156,

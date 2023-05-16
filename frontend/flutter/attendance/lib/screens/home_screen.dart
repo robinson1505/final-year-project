@@ -16,9 +16,9 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             backgroundColor: const Color.fromRGBO(
-              53,
-              190,
-              156,
+              1,
+              179,
+              239,
               1,
             ),
             title: const Text(
@@ -27,15 +27,23 @@ class HomeScreen extends StatelessWidget {
                 fontSize: 25,
               ),
             ),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.settings,
+                ),
+              )
+            ],
           ),
           body: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             children: [
-              const PercentCard(),
+              // const PercentCard(),
               SessionList(),
             ],
           ),
-          bottomNavigationBar: bottomNavigationBar(),
+          // bottomNavigationBar: bottomNavigationBar(),
         ));
   }
 }
