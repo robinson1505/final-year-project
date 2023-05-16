@@ -4,6 +4,7 @@ import {
   Modules,
   Timetable,
   Venue,
+  Programs
 } from "../models/index.js";
 // import { getToken } from "../utils/utils.js";
 import jwt from "jsonwebtoken";
@@ -78,11 +79,11 @@ const lecturerResolver = {
             include: [{ model: Timetable, include: [{ model: Venue }] }],
           });
                 
-            console.log("moduleID", modules[0].id);
+            console.log("moduleID", modules.map(module => module.id));
           if(modules.length > 0){
-            const lecturerModuleId = modules[0].id;
+            const lecturerModuleId = modules.map(module => module.id);
             console.log("Module Id",lecturerModuleId)
-            const timetable = await Timetable.findAll({where:{timetable_module:lecturerModuleId},include:[Modules,Venue]});
+            const timetable = await Timetable.findAll({where:{timetable_module:lecturerModuleId},include:[{model:Modules,include:[Programs]},Venue]});
             return timetable;
           }
         }

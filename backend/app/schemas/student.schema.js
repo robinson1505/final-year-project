@@ -10,6 +10,7 @@ type Student{
 }
 extend type Query{
     getAllStudents:[Student]
+    student:Student!
     getStudent(id:ID):Student
 }
 extend type Mutation{
@@ -28,6 +29,10 @@ extend type Mutation{
     deleteStudent(
         id:ID!
         ): Boolean!
+    loginStudent(
+        student_registration_number :String!
+        password:String!
+            ):String!
 }
 `;
 

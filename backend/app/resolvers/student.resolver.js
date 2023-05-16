@@ -1,13 +1,35 @@
-import { Student, Programs, Enrollment,Attendance } from "../models/index.js";
+import { Student, Programs, Enrollment, Attendance } from "../models/index.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { GraphQLError } from "graphql";
+
 const saltRounds = 10;
 
 const studentResolver = {
   Query: {
+    student: async (parent, args, context, info) => {
+      console.log(context.user);
+      console.log("context only", context.user.user.id);
+      try {
+        const id = context.user.user.id;
+        console.log(id);
+        if (!id) {
+          throw new Error("User not authenticated");
+        }
+        const student = await Student.findOne({
+          where: { id },
+        });
+        return student;
+      } catch (error) {
+        console.log("Error fetching student: ", error);
+        throw new Error(error);
+      }
+    },
+
     getAllStudents: async () => {
       try {
         const students = await Student.findAll({
-          include: [Programs, Enrollment,Attendance]
+          include: [Programs, Enrollment, Attendance],
         });
         return students;
       } catch (error) {
@@ -18,7 +40,7 @@ const studentResolver = {
     getStudent: async (parent, { id }) => {
       try {
         const student = await Student.findOne(
-          { include: [Programs, Enrollment,Attendance] },
+          { include: [Programs, Enrollment, Attendance] },
           { where: { id } }
         );
         return student;
@@ -26,7 +48,7 @@ const studentResolver = {
         console.error("Error fetching student data: ", error);
         throw new Error("Error fetching student data");
       }
-    }
+    },
   },
   Mutation: {
     addStudent: async (
@@ -35,7 +57,7 @@ const studentResolver = {
         student_full_name,
         student_registration_number,
         password,
-        student_program
+        student_program,
       }
     ) => {
       const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -44,7 +66,7 @@ const studentResolver = {
           student_full_name,
           student_registration_number,
           password: hashedPassword,
-          student_program
+          student_program,
         });
         return student;
       } catch (error) {
@@ -62,7 +84,7 @@ const studentResolver = {
         student.update({
           student_full_name,
           student_registration_number,
-          password: hashedPassword
+          password: hashedPassword,
         });
         return student;
       } catch (error) {
@@ -79,8 +101,40 @@ const studentResolver = {
         console.error("Error there can not find the student: ", error);
         throw new Error("Error on deleting student");
       }
-    }
-  }
+    },
+    loginStudent: async (_, args, context, info) => {
+      try {
+        const student = await Student.findOne({
+          where: {
+            student_registration_number: args.student_registration_number,
+          },
+        });
+        if (!student) {
+          throw new Error(
+            "There are is no student with that student registration number"
+          );
+        }
+        const isMatch = await bcrypt.compare(args.password, student.password);
+        if (!isMatch) {
+          throw new Error("Invalid credential");
+        }
+        const token = jwt.sign(
+          {
+            user: {
+              id: student.id,
+              username: student.student_registration_number,
+            },
+          },
+          "MyPrivate",
+          { expiresIn: "1h" }
+        );
+        console.log(token);
+        return token;
+      } catch (error) {
+        throw new GraphQLError(error);
+      }
+    },
+  },
 };
 
 export default studentResolver;
