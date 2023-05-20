@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<String> getTokenFromStorage() async {
+Future<void> saveTokenToStorage(String token) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  final token = prefs.getString('token') ?? '';
-  return token;
+  await prefs.setString('token', token);
+  print('Token: $token');
 }
