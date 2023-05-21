@@ -6,6 +6,7 @@ type Modules{
     number_of_students:Int!
     program:Program!
     lecturer:Lecturer!
+    enrollments:[Enrollment]!
     timetables:[Timetable!]!
 }
 extend type Query{

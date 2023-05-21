@@ -12,6 +12,7 @@ extend type Query{
     getAllStudents:[Student]
     student:Student!
     getStudent(id:ID):Student
+    getStudentTimetable:[Timetable]
 }
 extend type Mutation{
     addStudent(

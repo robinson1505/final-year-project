@@ -1,4 +1,12 @@
-import { Student, Programs, Enrollment, Attendance } from "../models/index.js";
+import {
+  Student,
+  Programs,
+  Enrollment,
+  Attendance,
+  Modules,
+  Timetable,
+  Venue,
+} from "../models/index.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { GraphQLError } from "graphql";
@@ -8,7 +16,7 @@ const saltRounds = 10;
 const studentResolver = {
   Query: {
     student: async (parent, args, context, info) => {
-      console.log(context.user);
+      console.log(context.student);
       console.log("context only", context.user.user.id);
       try {
         const id = context.user.user.id;
@@ -47,6 +55,39 @@ const studentResolver = {
       } catch (error) {
         console.error("Error fetching student data: ", error);
         throw new Error("Error fetching student data");
+      }
+    },
+    getStudentTimetable: async (id, args, context, info) => {
+      console.log(context.student);
+      console.log("Student with program id ", context.user.user.id);
+      try {
+        const id = context.user.user.id;
+        if (!id) {
+          throw new Error("User not authenticated");
+        }
+        const enrollment = await Enrollment.findAll({
+          where: { student_enrollment: id },
+          include: [Student, Modules],
+        });
+        console.log(
+          "Enrollment ID",
+          enrollment.map((enrollment) => enrollment.module_enrolled)
+        );
+
+        if (enrollment.length > 0) {
+          const enrollmentModuleId = enrollment.map(
+            (enrollment) => enrollment.module_enrolled
+          );
+          console.log("Module ID", enrollmentModuleId);
+          const timetable = await Timetable.findAll({
+            where: { timetable_module: enrollmentModuleId },
+            include: [{ model: Modules, include: [Programs] }, Venue],
+          });
+          return timetable;
+        }
+      } catch (error) {
+        console.log("Error fetching student: ", error);
+        throw new Error(error);
       }
     },
   },

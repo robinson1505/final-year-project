@@ -1,11 +1,11 @@
-import { Modules, Programs, Lecturer } from "../models/index.js";
+import { Modules, Programs, Lecturer, Enrollment } from "../models/index.js";
 
 const modulesResolver = {
   Query: {
     getAllModules: async () => {
       try {
         const modules = await Modules.findAll({
-          include: [Programs, Lecturer]
+          include: [Programs, Lecturer, Enrollment]
         });
         return modules;
       } catch (error) {
