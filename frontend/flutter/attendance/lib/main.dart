@@ -84,16 +84,6 @@ class AttendanceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//     const String fetchTimetable = """
-// query{
-//   getAllTimetable{
-//     id
-//     timetable_code
-//     module_day
-//   }
-// }
-// """;
-
     return GraphQLProvider(
       client: client,
       child: const MaterialApp(

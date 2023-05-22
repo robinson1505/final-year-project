@@ -29,24 +29,19 @@ class _LoginScreenState extends State<LoginScreen> {
         options: MutationOptions(
           operationName: "Login",
           document: gql(studentLogin()),
-          // variables: {
-          //   'studentRegistrationNumber': usernameController.text,
-          //   'password': passwordController.text,
-          // },
           onCompleted: (data) async {
             if (data != null) {
-            
+              context.showSnackBar("Successfull Login! Welcome");
               final token = data['loginStudent'];
-            
+
               await _saveTokenToStorage(token);
-             
+
               if (mounted) {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()),
                 );
               }
-              
             }
           },
           onError: (error) {
@@ -55,83 +50,107 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         builder: (RunMutation runMutation, QueryResult? result) {
           return Scaffold(
-              body: Center(
-            child: Container(
-              padding: const EdgeInsets.all(
-                22,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text.rich(
-                    TextSpan(
-                      text: "Student",
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: "Login",
-                        ),
-                      ],
+            body: Center(
+              child: Container(
+               
+                padding: const EdgeInsets.all(
+                  22,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+             const SizedBox(
+                      height: 30,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    controller: usernameController,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    controller: passwordController,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    width: 500,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.white.withOpacity(0.25),
-                              offset: const Offset(0, 0),
-                              blurRadius: 2,
-                              spreadRadius: 1)
-                        ]),
-                    child: TextButton(
-                      style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                      side: BorderSide.none)),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromRGBO(
-                              53,
-                              190,
-                              156,
-                              1,
-                            ),
-                          )),
-                      onPressed: () {
-                        login(runMutation);
-                      },
-                      child: const Text(
-                        "Login",
+                    circleCard(),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Text.rich(
+                      TextSpan(
+                        text: "STUDENT ",
                         style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromRGBO(
+                            1,
+                            179,
+                            239,
+                            1,
+                          ),
+                        
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: "LOGIN",
+                            style: TextStyle(color: Colors.black54)
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    TextField(
+                      controller: usernameController,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      controller: passwordController,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      width: 500,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.white.withOpacity(0.25),
+                                offset: const Offset(0, 0),
+                                blurRadius: 2,
+                                spreadRadius: 1)
+                          ]),
+                      child: TextButton(
+                        style: ButtonStyle(
+                            shape:
+                                MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                        side: BorderSide.none)),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color.fromRGBO(
+                                1,
+                                179,
+                                239,
+                                1,
+                              ),
+                            )),
+                        onPressed: () {
+                          login(runMutation);
+                        },
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ));
+          );
         });
   }
 
@@ -158,9 +177,6 @@ class _LoginScreenState extends State<LoginScreen> {
           MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
       }
-      // Navigate to another screen
-      // navigatorKey.currentState?.pushReplacement(
-      //     MaterialPageRoute(builder: (_) => const HomeScreen()));
     }
   }
 
@@ -170,8 +186,96 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
+Widget circleCard() {
+  return Container(
+    padding: const EdgeInsets.all(30),
+    width: 175,
+    height: 175,
+    decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(
+          100,
+        ),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(
+              1,
+              179,
+              239,
+              0.2,
+            ),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: Offset(0, 1), // changes position of shadow
+          ),
+        ]),
+    child: Image.asset(
+      'assets/images/logo.png',
+      width: 100,
+      height: 100,
+    ),
+  );
+}
 
- 
+// class CircleCard extends StatelessWidget {
+  
+//   CircleCard({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 150,
+//       height: 150,
+//       decoration: BoxDecoration(borderRadius: BorderRadius.circular(75)),
+//       child: Image.asset(
+//               'assets/images/logo.png',
+//               width: 100,
+//               height: 100,
+//             ),
+//     );
+
+    // return Container(
+    //   width: 150,
+    //   height: 150,
+    //   child: Card(
+    //     shape: RoundedRectangleBorder(
+    //       borderRadius: BorderRadius.circular(
+    //           75), // Half of the width/height to create a circle
+    //     ),
+    //     elevation: 4,
+    //     child: Padding(
+    //       padding: const EdgeInsets.all(8.0),
+    //       child: CircleAvatar(
+    //         // radius: 60,
+    //         backgroundImage: image,
+    //       ),
+    //     ),
+    //   ),
+    // );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

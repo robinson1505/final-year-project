@@ -62,49 +62,9 @@ query{
                     child: CircularProgressIndicator(),
                   );
                 }
-                // print("This is user data: $result.data");
-                // context.showSnackBar(result.toString());
-                final student = result.data!['student'];
-
-                return ListView(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                            flex: 2,
-                            child: Text(
-                              '${student['student_full_name']}',
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
-                            )),
-                        Expanded(
-                          child: Text(
-                            '${student['student_registration_number']}',
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                );
-                // return ListView.builder(
-                //     itemCount: students.length,
-                //     itemBuilder: (context, index) {
-                //       final student = students[index];
-                //       Text(student['id']);
-                //     });
+                return const SessionList();
               })),
           // bottomNavigationBar: bottomNavigationBar(),
         ));
   }
 }
-
-//  child: ListView(
-//               padding: const EdgeInsets.symmetric(horizontal: 8),
-//               children: [
-//                 // const PercentCard(),
-//                 SessionList(),
-//               ],
-//             ),

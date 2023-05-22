@@ -1,21 +1,19 @@
 class VenueModel {
-  String? id;
-  String? venueName;
-  String? venueCode;
+  final String venueName;
+  final String venueCode;
 
-  VenueModel({this.id, this.venueName, this.venueCode});
+  VenueModel({required this.venueName, required this.venueCode});
 
-  VenueModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    venueName = json['venue_name'];
-    venueCode = json['venue_code'];
+  factory VenueModel.fromJson(Map<String, dynamic> json) {
+    return VenueModel(
+        venueName: json['venue_name'], venueCode: json['venue_code']);
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['venue_name'] = this.venueName;
-    data['venue_code'] = this.venueCode;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['id'] = this.id;
+  //   data['venue_name'] = this.venueName;
+  //   data['venue_code'] = this.venueCode;
+  //   return data;
+  // }
 }

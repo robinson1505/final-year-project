@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   loginRoute() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) =>  const LoginScreen()));
+        context, MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 
   @override
@@ -48,14 +48,22 @@ class _SplashScreenState extends State<SplashScreen> {
                 TextSpan(
                   text: "Developed by: ",
                   style: TextStyle(
-                      fontSize: 15, color: Color.fromRGBO(53, 190, 156, 1)),
+                    fontSize: 15,
+                    color: Color.fromRGBO(
+                      1,
+                      179,
+                      239,
+                      1,
+                    ),
+                  ),
                   children: [
                     TextSpan(
                       text: "Robinson",
                       style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(53, 190, 156, 1),),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(53, 190, 156, 1),
+                      ),
                     ),
                   ],
                 ),
