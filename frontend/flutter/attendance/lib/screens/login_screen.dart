@@ -6,6 +6,7 @@ import 'package:attendance/utils/context_extension.dart';
 // import 'package:attendance/widget/input_field.dart';
 // import 'package:attendance/widget/submit_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 // import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  bool _hidePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +54,13 @@ class _LoginScreenState extends State<LoginScreen> {
           return Scaffold(
             body: Center(
               child: Container(
-               
                 padding: const EdgeInsets.all(
                   22,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-             const SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     circleCard(),
@@ -78,13 +79,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             239,
                             1,
                           ),
-                        
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            text: "LOGIN",
-                            style: TextStyle(color: Colors.black54)
-                          ),
+                              text: "LOGIN",
+                              style: TextStyle(color: Colors.black54)),
                         ],
                       ),
                     ),
@@ -96,12 +95,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextField(
                       controller: usernameController,
+                      decoration: const InputDecoration(
+                          labelText: "username",
+                          contentPadding: EdgeInsets.all(
+                            10,
+                          ),
+                          suffixIcon: Icon(Icons.person)),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     TextField(
                       controller: passwordController,
+                      obscureText: _hidePassword,
+                      decoration: InputDecoration(
+                          labelText: "password",
+                          contentPadding: const EdgeInsets.all(
+                            10,
+                          ),
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _hidePassword = !_hidePassword;
+                                });
+                              },
+                              icon: Icon(_hidePassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility))),
                     ),
                     const SizedBox(
                       height: 30,
@@ -120,11 +140,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ]),
                       child: TextButton(
                         style: ButtonStyle(
-                            shape:
-                                MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                        side: BorderSide.none)),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                    side: BorderSide.none)),
                             backgroundColor: MaterialStateProperty.all<Color>(
                               const Color.fromRGBO(
                                 1,
@@ -150,6 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+          
           );
         });
   }

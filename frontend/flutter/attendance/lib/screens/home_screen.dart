@@ -1,6 +1,6 @@
 // import 'package:attendance/widget/bottom_navigation.dart';
 // import 'package:attendance/widget/percent_card.dart';
-import 'package:attendance/utils/context_extension.dart';
+// import 'package:attendance/utils/context_extension.dart';
 import 'package:attendance/widget/session_list.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -15,7 +15,6 @@ query{
    student{
      student_registration_number
        student_full_name
-
    }
  }
  """;
