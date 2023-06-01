@@ -27,3 +27,17 @@
 //     return data;
 //   }
 // }
+
+class BeaconModel {
+  final String uuid;
+  final String beaconMacAddress;
+
+  BeaconModel({required this.uuid, required this.beaconMacAddress});
+
+  factory BeaconModel.fromJson(Map<String, dynamic> json) {
+    return BeaconModel(
+      uuid: json['id'],
+      beaconMacAddress: json['beacon_mac_address'],
+    );
+  }
+}

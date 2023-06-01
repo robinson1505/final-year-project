@@ -43,6 +43,7 @@ dependencies:
   flutter_beacon: ^0.5.1
   shared_preferences: ^2.1.1
   graphql_flutter: ^5.1.2
+  location: ^4.4.0
 
 dev_dependencies:
   flutter_test:

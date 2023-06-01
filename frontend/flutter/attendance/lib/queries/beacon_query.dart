@@ -1,7 +1,7 @@
 String beacon() {
   return '''
- query GetBeacon(\$uuid: String!,) {
-   getBeacon(id:\$uuid) {
+ query GetBeacons() {
+   getBeacon() {
      id
      beacon_mac_address
    }
