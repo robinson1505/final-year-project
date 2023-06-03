@@ -29,14 +29,14 @@
 // }
 
 class BeaconModel {
-  final String uuid;
+  final String  proximityUUID;
   final String beaconMacAddress;
 
-  BeaconModel({required this.uuid, required this.beaconMacAddress});
+  BeaconModel({required this. proximityUUID, required this.beaconMacAddress});
 
   factory BeaconModel.fromJson(Map<String, dynamic> json) {
     return BeaconModel(
-      uuid: json['id'],
+       proximityUUID: json['id'],
       beaconMacAddress: json['beacon_mac_address'],
     );
   }

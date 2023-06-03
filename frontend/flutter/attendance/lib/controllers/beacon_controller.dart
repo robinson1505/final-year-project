@@ -50,21 +50,21 @@ class BeaconController extends GetxController {
   }
 // Fetch and Post beacons
 
-  final beacon = BeaconModel(uuid: '', beaconMacAddress: '').obs;
+  final beacon = BeaconModel( proximityUUID: '', beaconMacAddress: '').obs;
   final BeaconService beaconService;
   BeaconController(this.beaconService);
 
-  Future<void> fetchBeacon(String uuid) async {
+  Future<BeaconModel> fetchBeacon(String uuid) async {
     try {
       final BeaconModel fetchedBeacon = await beaconService.fetchBeacon(uuid);
-      beacon.value = fetchedBeacon;
+      return beacon.value = fetchedBeacon;
     } catch (e) {
       throw Exception('Error fetching beacon: $e');
     }
   }
 
   // Fetch all Beacon List
-  final RxList<BeaconModel> allBeacons = RxList<BeaconModel>();
+  // final RxList<BeaconModel> allBeacons = RxList<BeaconModel>();
 
   @override
   void onInit() {
@@ -72,10 +72,11 @@ class BeaconController extends GetxController {
     fetchBeacons();
   }
 
-  Future<void> fetchBeacons() async {
+  Future<List<BeaconModel>> fetchBeacons() async {
+    final RxList<BeaconModel> allBeacons =RxList<BeaconModel>();
     try {
       final List<BeaconModel> fetchedBeacons = await beaconService.getBeacons();
-      allBeacons.value = fetchedBeacons;
+      return allBeacons.value = fetchedBeacons;
     } catch (e) {
       throw Exception('Error fetching beacons: $e');
     }
