@@ -16,11 +16,11 @@ class PercentCard extends StatelessWidget {
         height: 200,
         child: Row(
           children: [
-            Expanded(
+            const Expanded(
               flex: 1,
               child: Card(
                 elevation: 0,
-                color: const Color.fromRGBO(
+                color: Color.fromRGBO(
                   255,
                   255,
                   255,
@@ -30,7 +30,7 @@ class PercentCard extends StatelessWidget {
                     height: 200,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Text(
                           "Week No:",
                           style: TextStyle(

@@ -1,6 +1,5 @@
 // import 'package:attendance/controllers/timetable_controller.dart';
 // import "package:attendance/widget/sessions.dart";
-import "package:attendance/models/timetable_list.dart";
 import "package:attendance/queries/timetable_query.dart";
 import "package:flutter/material.dart";
 import "package:flutter_spinkit/flutter_spinkit.dart";

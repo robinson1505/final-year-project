@@ -1,10 +1,5 @@
-import 'dart:async';
-import 'package:attendance/controllers/beacon_controller.dart';
-import 'package:attendance/models/beacon_model.dart';
 import 'package:attendance/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_beacon/flutter_beacon.dart';
-import 'package:get/get.dart';
 
 class FormWidget extends StatefulWidget {
   const FormWidget({super.key});

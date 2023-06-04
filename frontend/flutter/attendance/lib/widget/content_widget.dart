@@ -62,7 +62,7 @@ class _ContentWidgetState extends State<ContentWidget> {
           ),
       
           
-          SessionList()
+          const SessionList()
 
         
         ],

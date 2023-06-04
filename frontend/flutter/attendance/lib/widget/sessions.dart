@@ -7,10 +7,10 @@ class SessionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return const Card(
       elevation: 2,
       child: Padding(
-          padding: const EdgeInsets.all(
+          padding: EdgeInsets.all(
             8.0,
           ),
           child: SizedBox(
@@ -19,7 +19,7 @@ class SessionCard extends StatelessWidget {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
+                      children: [
                     Expanded(
                       flex: 1,
                       child: Text("day"),

@@ -4,10 +4,12 @@ import 'dart:io';
 import 'package:attendance/controllers/beacon_controller.dart';
 import 'package:attendance/models/beacon_model.dart';
 import 'package:attendance/services/beacon_service.dart';
+import 'package:attendance/widget/session_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:get/get.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -90,92 +92,93 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        title: const Text('Flutter Beacon'),
-        centerTitle: false,
-        actions: <Widget>[
-          Obx(() {
-            if (!beaconController.locationServiceEnabled) {
-              return IconButton(
-                tooltip: 'Not Determined',
-                icon: const Icon(Icons.portable_wifi_off),
-                color: Colors.grey,
-                onPressed: () {},
-              );
-            }
+    return const TabScanning();
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     backgroundColor: Colors.blueGrey,
+    //     title: const Text('Flutter Beacon'),
+    //     centerTitle: false,
+    //     actions: <Widget>[
+    //       Obx(() {
+    //         if (!beaconController.locationServiceEnabled) {
+    //           return IconButton(
+    //             tooltip: 'Not Determined',
+    //             icon: const Icon(Icons.portable_wifi_off),
+    //             color: Colors.grey,
+    //             onPressed: () {},
+    //           );
+    //         }
 
-            if (!beaconController.authorizationStatusOk) {
-              return IconButton(
-                tooltip: 'Not Authorized',
-                icon: const Icon(Icons.portable_wifi_off),
-                color: Colors.red,
-                onPressed: () async {
-                  await flutterBeacon.requestAuthorization;
-                },
-              );
-            }
+    //         if (!beaconController.authorizationStatusOk) {
+    //           return IconButton(
+    //             tooltip: 'Not Authorized',
+    //             icon: const Icon(Icons.portable_wifi_off),
+    //             color: Colors.red,
+    //             onPressed: () async {
+    //               await flutterBeacon.requestAuthorization;
+    //             },
+    //           );
+    //         }
 
-            return IconButton(
-              tooltip: 'Authorized',
-              icon: const Icon(Icons.wifi_tethering),
-              color: Colors.blue,
-              onPressed: () async {
-                await flutterBeacon.requestAuthorization;
-              },
-            );
-          }),
-          Obx(() {
-            return IconButton(
-              tooltip: beaconController.locationServiceEnabled
-                  ? 'Location Service ON'
-                  : 'Location Service OFF',
-              icon: Icon(
-                beaconController.locationServiceEnabled
-                    ? Icons.location_on
-                    : Icons.location_off,
-              ),
-              color: beaconController.locationServiceEnabled
-                  ? Colors.blue
-                  : Colors.red,
-              onPressed: beaconController.locationServiceEnabled
-                  ? () {}
-                  : handleOpenLocationSettings,
-            );
-          }),
-          Obx(() {
-            final state = beaconController.bluetoothState.value;
+    //         return IconButton(
+    //           tooltip: 'Authorized',
+    //           icon: const Icon(Icons.wifi_tethering),
+    //           color: Colors.blue,
+    //           onPressed: () async {
+    //             await flutterBeacon.requestAuthorization;
+    //           },
+    //         );
+    //       }),
+    //       Obx(() {
+    //         return IconButton(
+    //           tooltip: beaconController.locationServiceEnabled
+    //               ? 'Location Service ON'
+    //               : 'Location Service OFF',
+    //           icon: Icon(
+    //             beaconController.locationServiceEnabled
+    //                 ? Icons.location_on
+    //                 : Icons.location_off,
+    //           ),
+    //           color: beaconController.locationServiceEnabled
+    //               ? Colors.blue
+    //               : Colors.red,
+    //           onPressed: beaconController.locationServiceEnabled
+    //               ? () {}
+    //               : handleOpenLocationSettings,
+    //         );
+    //       }),
+    //       Obx(() {
+    //         final state = beaconController.bluetoothState.value;
 
-            if (state == BluetoothState.stateOn) {
-              return IconButton(
-                tooltip: 'Bluetooth ON',
-                icon: const Icon(Icons.bluetooth_connected),
-                onPressed: () {},
-                color: Colors.lightBlueAccent,
-              );
-            }
+    //         if (state == BluetoothState.stateOn) {
+    //           return IconButton(
+    //             tooltip: 'Bluetooth ON',
+    //             icon: const Icon(Icons.bluetooth_connected),
+    //             onPressed: () {},
+    //             color: Colors.lightBlueAccent,
+    //           );
+    //         }
 
-            if (state == BluetoothState.stateOff) {
-              return IconButton(
-                tooltip: 'Bluetooth OFF',
-                icon: const Icon(Icons.bluetooth),
-                onPressed: handleOpenBluetooth,
-                color: Colors.red,
-              );
-            }
+    //         if (state == BluetoothState.stateOff) {
+    //           return IconButton(
+    //             tooltip: 'Bluetooth OFF',
+    //             icon: const Icon(Icons.bluetooth),
+    //             onPressed: handleOpenBluetooth,
+    //             color: Colors.red,
+    //           );
+    //         }
 
-            return IconButton(
-              icon: const Icon(Icons.bluetooth_disabled),
-              tooltip: 'Bluetooth State Unknown',
-              onPressed: () {},
-              color: Colors.grey,
-            );
-          }),
-        ],
-      ),
-      body: TabScanning(),
-    );
+    //         return IconButton(
+    //           icon: const Icon(Icons.bluetooth_disabled),
+    //           tooltip: 'Bluetooth State Unknown',
+    //           onPressed: () {},
+    //           color: Colors.grey,
+    //         );
+    //       }),
+    //     ],
+    //   ),
+    //   body: TabScanning(),
+    // );
   }
 
   handleOpenLocationSettings() async {
@@ -229,19 +232,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     }
   }
 }
-
-// import 'dart:async';
-
-// import 'package:attendance/controllers/beacon_controller.dart';
-// import 'package:attendance/models/beacon_model.dart';
-// import 'package:attendance/queries/beacon_query.dart';
-// import 'package:attendance/services/beacon_service.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:flutter_beacon/flutter_beacon.dart';
-// import 'package:get/get.dart';
-// import 'package:graphql_flutter/graphql_flutter.dart';
-// // import 'package:graphql_flutter/graphql_flutter.dart';
 
 class TabScanning extends StatefulWidget {
   const TabScanning({super.key});
@@ -334,38 +324,38 @@ class _TabScanning extends State<TabScanning> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _beacons.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : ListView(
-              children: ListTile.divideTiles(
-                context: context,
-                tiles: _beacons.map(
-                  (beacon) {
-                    return ListTile(
-                      title: Text(
-                        beacon.proximityUUID,
-                        style: const TextStyle(fontSize: 15.0),
-                      ),
-                      subtitle: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Flexible(
-                            flex: 1,
-                            fit: FlexFit.tight,
-                            child: Text(
-                              'proximityUUID: ${beacon.proximityUUID}',
-                              style: const TextStyle(fontSize: 13.0),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ).toList(),
-            ),
-    );
+    // return Scaffold(
+    //   body: _beacons.isEmpty
+    //       ? const Center(child: CircularProgressIndicator())
+    //       : ListView(
+    //           children: ListTile.divideTiles(
+    //             context: context,
+    //             tiles: _beacons.map(
+    //               (beacon) {
+    //                 return ListTile(
+    //                   title: Text(
+    //                     beacon.proximityUUID,
+    //                     style: const TextStyle(fontSize: 15.0),
+    //                   ),
+    //                   subtitle: Row(
+    //                     mainAxisSize: MainAxisSize.max,
+    //                     children: <Widget>[
+    //                       Flexible(
+    //                         flex: 1,
+    //                         fit: FlexFit.tight,
+    //                         child: Text(
+    //                           'proximityUUID: ${beacon.proximityUUID}',
+    //                           style: const TextStyle(fontSize: 13.0),
+    //                         ),
+    //                       ),
+    //                     ],
+    //                   ),
+    //                 );
+    //               },
+    //             ),
+    //           ).toList(),
+    //         ),
+    // );
 
 //     // return Scaffold(
 //     //   appBar: AppBar(
@@ -424,74 +414,63 @@ class _TabScanning extends State<TabScanning> {
 
 //     //}
 
-// //     const String student = """
-// // query{
-// //    student{
-// //      student_registration_number
-// //        student_full_name
-// //    }
-// //  }
-// //  """;
+    const String student = """
+query{
+   student{
+     student_registration_number
+       student_full_name
+   }
+ }
+ """;
 
-//     //   QueryOptions _buildQueryOptions(String uuid) {
-//     //     return QueryOptions(document: gql(beacon()), variables: {
-//     //       'uuid': uuid,
-//     //     });
-//     //   }
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: const Color.fromRGBO(
+            1,
+            179,
+            239,
+            1,
+          ),
+          title: const Text(
+            'Attendance App',
+            style: TextStyle(
+              fontSize: 25,
+            ),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.settings,
+              ),
+            )
+          ],
+        ),
+        body: Query(
+          options: QueryOptions(document: gql(student)),
+          builder: ((result, {fetchMore, refetch}) {
+            if (result.hasException) {
+              return Center(
+                child: Text(result.exception.toString()),
+              );
+            }
 
-//     // Future<QueryResult> _fetchBeacon(String uuid) {
-//     //   final options = _buildQueryOptions(uuid);
-//     //   return client.value.query(options);
-//     // }
-
-//     // return GestureDetector(
-//     //   onTap: () {
-//     //     FocusScope.of(context).unfocus();
-//     //   },
-//     //   child: Scaffold(
-//     //     appBar: AppBar(
-//     //       centerTitle: true,
-//     //       backgroundColor: const Color.fromRGBO(
-//     //         1,
-//     //         179,
-//     //         239,
-//     //         1,
-//     //       ),
-//     //       title: const Text(
-//     //         'Attendance App',
-//     //         style: TextStyle(
-//     //           fontSize: 25,
-//     //         ),
-//     //       ),
-//     //       actions: [
-//     //         IconButton(
-//     //           onPressed: () {},
-//     //           icon: const Icon(
-//     //             Icons.settings,
-//     //           ),
-//     //         )
-//     //       ],
-//     //     ),
-//     //     body: Query(
-//     //       options: QueryOptions(document: gql(student)),
-//     //       builder: ((result, {fetchMore, refetch}) {
-//     //         if (result.hasException) {
-//     //           return Center(
-//     //             child: Text(result.exception.toString()),
-//     //           );
-//     //         }
-
-//     //         if (result.isLoading) {
-//     //           return const Center(
-//     //             child: CircularProgressIndicator(),
-//     //           );
-//     //         }
-//     //         return const SessionList();
-//     //       }),
-//     //     ),
-//     //     // bottomNavigationBar: bottomNavigationBar(),
-//     //   ),
-//     // );
+            if (result.isLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return const SessionList();
+          }),
+        ),
+        // bottomNavigationBar: bottomNavigationBar(),
+      ),
+    );
   }
 
   List<Region> convertToRegions(List<BeaconModel> beaconData) {
@@ -506,7 +485,4 @@ class _TabScanning extends State<TabScanning> {
 
     return regions;
   }
-
 }
-
-
