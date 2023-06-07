@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:attendance/controllers/beacon_controller.dart';
 import 'package:attendance/models/beacon_model.dart';
+import 'package:attendance/screens/login_screen.dart';
 import 'package:attendance/services/beacon_service.dart';
 import 'package:attendance/widget/session_list.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -58,12 +60,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         beaconController.authorizationStatusOk &&
         beaconController.locationServiceEnabled) {
       print('STATE READY');
+      // HERE comes the notification
       if (currentIndex == 0) {
         print('SCANNING');
         beaconController.startScanning();
       }
     } else {
-      print('STATE NOT READY');
+      // HERE comes the notification
       beaconController.pauseScanning();
     }
   }
@@ -443,12 +446,23 @@ query{
             ),
           ),
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.settings,
-              ),
-            )
+            PopupMenuButton(
+                icon: const Icon(Icons.settings),
+                itemBuilder: (context) => [
+                      PopupMenuItem(
+                          onTap: () async {
+                            final prefs = await SharedPreferences.getInstance();
+                            await prefs.remove('token');
+                            if (mounted) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginScreen()),
+                              );
+                            }
+                          },
+                          child: Text("sign out"))
+                    ])
           ],
         ),
         body: Query(
